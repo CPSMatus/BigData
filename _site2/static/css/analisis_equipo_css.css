@@ -1,0 +1,105 @@
+#by_jornada {
+  width: auto;
+  color: rgb(245,245,245);
+}
+
+#by_minutes {
+  width: auto;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+#radio_div {
+  width: 50%;
+}
+
+#radio_div-1 {
+  width: 50%;
+  align-items: end;
+}
+
+#h_resumen_jornada {
+  color: rgb(255,255,255);
+}
+
+#row_table_header {
+  height: auto;
+  width: auto;
+}
+
+#content {
+  background: rgb(28, 28, 28);
+}
+
+.graph_headers {
+  background: rgb(14,15,16);
+  border-style: none;
+  border-color: rgb(79,79,79);
+}
+
+.body_charts {
+  background: rgb(28,28,28);
+}
+
+.info_card {
+  background: rgb(28,28,28);
+}
+
+#distance_card {
+  margin-bottom: 20px;
+  border-style: solid;
+  border-color: rgb(133, 135, 150);
+  border-top-color: rgb(133,;
+  border-right-color: 135,;
+  border-bottom-color: 150);
+  border-left-color: 135,;
+}
+
+.wimu_card {
+  margin-bottom: 15px;
+  border-style: solid;
+  border-color: rgb(133,135,150);
+}
+
+#table_header {
+  margin-top: 15px;
+  width: 1986px;
+  height: 106px;
+}
+
+#column1 {
+  width: 50%;
+}
+
+.col-design {
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-style: none;
+}
+
+.col-select {
+  margin-top: 0px;
+}
+
+@media (min-width: 768px) {
+  .col-select {
+    margin-top: 15px;
+  }
+}
+
+@media (min-width: 576px) {
+  .col-select {
+    margin-top: 15px;
+  }
+}
+
+@media (min-width: 300px) {
+  .col-select {
+    margin-top: 15px;
+  }
+}
+
+.col-num {
+}
+

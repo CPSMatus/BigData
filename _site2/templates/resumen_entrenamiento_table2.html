@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Table - Brand</title>
+<link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&amp;display=swap">
+<link rel="stylesheet" href="{% static '/fonts/fontawesome-all.min.css'%}">
+<link rel="stylesheet" href="{% static '/fonts/font-awesome.min.css'%}">
+<link rel="stylesheet" href="{% static '/fonts/fontawesome5-overrides.min.css'%}">
+
+<link rel="stylesheet" href = "{% static '/css/resumen_entrenamiento.css'%}">
+<link rel="stylesheet" href="{% static '/css/resumen_jugador_xpartido_css.css'%}">
+
+</head>
+<body id="page-top" style="background: rgb(28,28,28);">
+<div id="wrapper">
+<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(33,33,33);border-right-width: 1px;border-right-style: none;">
+<div class="container-fluid d-flex flex-column p-0">
+<a class="navbar-brand" href="#">
+<div class="justify-content-center align-items-center align-content-center" style="width: 100px;">
+<a href="inicio.html">
+<img class="img-fluid d-none d-xxl-flex align-items-center align-content-center" src="{% static '/img/Escudo_Puebla_1@4x.png'%}">
+</a>
+</div>
+</a>
+<a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+<div class="sidebar-brand-text mx-3">
+<span>CLUB PUEBLA</span>
+</div>
+</a>
+<ul class="navbar-nav text-light" id="accordionSidebar">
+<li class="nav-item">
+<a class="nav-link active" href="resumen_entrenamiento_table2.html">
+<i class="fas fa-tachometer-alt">
+</i>
+<span>Dashboard</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="analisis_torneo_table.html">
+<i class="fa fa-calendar">
+</i>
+<span>Jornadas</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="table.html">
+<i class="fas fa-table">
+</i>
+<span>Sessions</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="login.html">
+<i class="fa fa-bar-chart">
+</i>
+<span>Logistica</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="register.html">
+<i class="fas fa-shoe-prints">
+</i>
+<span>Administracion</span>
+</a>
+</li>
+</ul>
+<div class="text-center d-none d-md-inline">
+<button class="btn rounded-circle border-0" id="sidebarToggle" type="button">
+</button>
+</div>
+</div>
+</nav>
+<div class="d-flex flex-column" id="content-wrapper" style="background: rgb(28,28,28);">
+<div id="content">
+<div class="container-fluid" style="margin-top: 15px;">
+<div class="row d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-end justify-content-xl-end justify-content-xxl-end class-row">
+<div class="col-lg-6 col-xl-6 col-xxl-5 d-xxl-flex justify-content-xxl-end col-add-participants" style="padding: 0px;padding-right: 12px;padding-left: 12px;">
+<div class="row" style="width: 100%;margin-left: 0px;margin-right: 0px;">
+<div class="col-md-10 col-lg-9 col-xl-10 col-xxl-10 col-txt-input">
+<input type="text" id="ti-add-participants" class="search_players" placeholder="Agregar jugador">
+</div>
+<div class="col-md-2 col-lg-3 col-xl-2 col-xxl-2 d-xxl-flex align-items-xxl-center" style="padding: 12px;padding-left: 0px;padding-right: 0px;">
+<div class="btn-group" role="group" style="width: 100%;">
+<button class="btn d-flex justify-content-center btn-group" type="button">
+<i class="fa fa-remove">
+</i>
+</button>
+<button class="btn d-flex justify-content-center btn-group" type="button">
+<i class="fa fa-check">
+</i>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+<div class="row" style="height: 100%;">
+<div class="col-lg-3 col-xl-3 col-xxl-3 d-lg-flex d-xl-flex d-xxl-flex align-items-lg-end align-items-xl-end align-items-xxl-end col-left-span">
+<span style="width: 100%;">Desde:&nbsp;</span>
+</div>
+
+<form action = "/resumen_entrenamiento/" method = "POST">
+  	{% csrf_token %}
+  <div class="col-lg-9 d-lg-flex d-xl-flex d-xxl-flex align-items-lg-end align-items-xl-end align-items-xxl-end">
+  <input id = "calendar_from"  name = "calendar_from"  class="d-xl-flex align-items-xl-end date-filter" type="date">
+  </div>
+  </div>
+  </div>
+  <div class="col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+  <div class="row" style="height: 100%;">
+  <div class="col-lg-3 col-xl-3 col-xxl-3 d-lg-flex d-xl-flex d-xxl-flex align-items-lg-end align-items-xl-end align-items-xxl-end col-left-span">
+  <span class="d-lg-flex d-xl-flex align-items-lg-center align-items-xl-center span-label">Hasta:&nbsp;</span>
+  </div>
+  <div class="col-lg-9 col-xl-9 col-xxl-9 d-lg-flex d-xl-flex d-xxl-flex align-items-lg-end align-items-xl-end align-items-xxl-end left-col">
+  <input id = "calendar_to" name = "calendar_to"  class="d-xl-flex align-items-xl-end date-filter" type="date">
+  </div>
+  </div>
+  </div>
+  <div class="col-lg-2 col-xl-3 col-xxl-3 d-lg-flex align-items-lg-end col-select">
+
+  <select id = "players_select" name = "players_select" class="select-filter">
+  <optgroup label="Jugadores">
+
+  <option value="0" selected="">Todos</option>
+
+  {% for v in table_list %}
+    <option value="{{v.jugador_id}}"> {{v.wimu_alias}} </option>
+  {% empty %}
+      <p>empty</p>
+    </tr>
+  {% endfor %}
+  </optgroup>
+  </select>
+  </div>
+
+  <div class="col-lg-2 col-xl-2 col-xxl-2 d-lg-flex align-items-lg-end col-select">
+  <select  id = "posicion_select" name = "posicion_select" class="select-filter">
+  <optgroup label="Posicion">
+  <option value="0" selected = "">Todos</option>
+  <option value="1">Portero</option>
+  <option value="2">Central</option>
+  <option value="3">Carrilero</option>
+  <option value="4">Volante</option>
+  <option value="5">Media Punta</option>
+  <option value="6">Centro Delantero</option>
+  </optgroup>
+  </select>
+  </div>
+
+  <div class="col-md-12 col-lg-2 col-xl-1 col-xxl-1 d-lg-flex align-items-lg-center col-right">
+  <div class="row" id="row-apply-button">
+  <div class="col-lg-12 col-xl-12 col-xxl-12 d-lg-flex align-items-lg-end" id="col-righ-bottom">
+  <button class="btn d-flex justify-content-center btn-group" id="btn-apply" type="submit">
+  <span>Apply</span>
+  </button>
+</form>
+
+</div>
+</div>
+</div>
+</div>
+<div class="row" id="row-participa" style="margin-top: 25px;">
+<div class="col">
+<div class="card shadow" style="width: 100%;">
+<div class="card-header d-xxl-flex align-items-xxl-start py-3" id="card-header-participa">
+<p class="d-xxl-flex card-header-p">Participantes (26)</p>
+</div>
+<div class="card-body" id="card-body-particpa">
+<div class="table-responsive ">
+
+  <table id="tableId" class="table">
+    <thead>
+    <tr style="width: auto;">
+      <th class="table_title_class">
+      <input type="checkbox">
+      </th>
+      <th class="table_title_class">Tipo</th>
+      <th class="table_title_class">Fecha</th>
+      <th class="table_title_class">Jugador</th>
+      <th class="table_title_class">Drill Duration</th>
+      <th class="table_title_class">Total Distance(m)</th>
+      <th class="table_title_class">m/min</th>
+      <th class="table_title_class">HMLD</th>
+      <th class="table_title_class">Explosive Distance</th>
+      <th class="table_title_class">HSR</th>
+      <th class="table_title_class">ACC + 3</th>
+      <th class="table_title_class">DEC + 3</th>
+      <th class="table_title_class">Distance Acc</th>
+      <th class="table_title_class">Distance Dec</th>
+      <th class="table_title_class">Player Load</th>
+    </tr>
+    </thead>
+<tbody>
+
+  {% for v in table_list %}
+
+      <tr>
+        <td class="participa-row-1">
+        <input type="checkbox">
+        </td>
+        <td class="cell-info">{{v.sesion}}</td>
+        <td class="cell-info">Fecha</td>
+        <td class="cell-info">{{v.wimu_alias}}</td>
+        <td class="cell-info">{{v.drill_duration}}</td>
+        <td class="cell-info">{{v.total_distance}}</td>
+        <td class="cell-info">{{v.m_min}}</td>
+        <td class="cell-info">{{v.hmld}}</td>
+        <td class="cell-info">{{v.explosive_distance}}</td>
+        <td class="cell-info">{{v.hsr_abs}}</td>
+        <td class="cell-info">acc+3</td>
+        <td class="cell-info">dec+3</td>
+        <td class="cell-info">{{v.high_acc_m}}</td>
+        <td class="cell-info">{{v.high_dec_m}}</td>
+        <td class="cell-info">{{v.player_load}}</td>
+
+    {% empty %}
+        <p>empty</p>
+      </tr>
+    {% endfor %}
+
+
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="row" id="row-no_participa">
+<div class="col-xl-6" style="width: 100%;">
+<div class="card shadow card-no-participa" style="margin-top: 45px;">
+<div class="card-header d-xxl-flex align-items-xxl-start py-3" id="card-header-no-participa">
+<p class="d-xxl-flex card-header-p">No Participa ()</p>
+</div>
+<div class="card-body" style="background: rgb(28,28,28);border-bottom-color: rgb(133, 135, 150);">
+<div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info" style="color: rgb(133, 135, 150);">
+<table class="table my-0" id="dataTable">
+  <thead>
+    <tr>
+    <th class="text-start" style="width: 50px;">
+    <input type="checkbox" style="width: 15px;">
+    </th>
+    <th>Nombre</th>
+    <th>Posicion</th>
+    <th>Observaciones</th>
+    <th>Start date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+
+    </tr>
+    <tr>
+
+    </tr>
+    <tr>
+
+    </tr>
+    <tr>
+
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row" style="height: 150px;margin-top: 14px;">
+<div class="col" style="height: 100%;width: 100%;">
+<div class="card" id="card-microciclo">
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="sticky-footer" style="background: rgb(30,30,30);margin-top: 0px;margin-left: 0px;border-color: rgb(69,134,198);border-top: 1px solid rgb(69,124,198);height: 90px;">
+<div class="container my-auto">
+<div class="text-center my-auto copyright">
+<span>Copyright © Brand 2021</span>
+</div>
+</div>
+</footer>
+</div>
+<a class="border rounded d-inline scroll-to-top" href="#page-top">
+<i class="fas fa-angle-up">
+</i>
+</a>
+</div>
+
+
+
+<script src="{% static '/js/conditional_format.js'%}">
+</script>
+
+<script>
+  assignColorToTableColumn("tableId", [5,6,7,8]);
+</script>
+
+<script src="{% static '/bootstrap/js/bootstrap.min.js'%}">
+</script>
+<script src="{% static '/js/theme.js'%}">
+</script>
+<script src="{% static '/js/jquery-3.6.0.min.js'%}">
+</script>
+
+</body>
+</html>

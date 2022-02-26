@@ -1,0 +1,79 @@
+.h_analisis {
+  rgb(255,250,243);
+
+}
+
+.row_class {
+  margin-left: 0px;
+  margin-top: 10px;
+}
+
+.border-start-success.card-resume {
+  background: rgb(28,28,28);
+  height: 95px;
+}
+
+#span-card-2 {
+  color: rgb(28, 200, 138);
+}
+
+.border-start-success {
+  background: rgb(28,28,28);
+  height: 95px;
+}
+
+#span-card-1 {
+  color: rgb(28, 200, 138);
+}
+
+#span-principal {
+  color: rgb(255,255,255);
+}
+
+#span-card-3 {
+  color: rgb(246,194,62);
+}
+
+.span-card-info {
+  rgb(255,250,243);
+}
+
+.card-header-graph {
+  background: rgb(28,28,28);
+  padding: 8px 16px;
+  margin-top: -2px;
+  border-style: none;
+  border: 1px solid rgb(79,79,79);
+}
+
+.card-body-graph {
+  background: rgb(28,28,28);
+  border: 1px solid rgb(79,79,79) ;
+}
+
+.card-graph {
+  margin-bottom: 24px;
+  height: 100%;
+  width: 100%;
+  border-style: none;
+}
+
+.row_chart {
+  margin-left: 0px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.card-header-title {
+}
+
+.card-header-title {
+  color: rgb(255,255,255);
+  font-size: 16px;
+}
+
+.card-graph {
+  border-style: solid;
+  border-color: rgb(79,79,79);
+  background: rgb(28,28,28);
+}

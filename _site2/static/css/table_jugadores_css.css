@@ -1,0 +1,45 @@
+.list_tem {
+}
+
+@media (min-width: 768px) {
+  .col_md {
+  }
+}
+
+.black-card {
+  background: rgb(28,28,28);
+  border-style: solid;
+  border-color: rgb(74,76,84);
+}
+
+.black-card:hover {
+  background: rgb(28,28,28);
+  border-style: solid;
+  border-color: rgb(74,76,84);
+  transform: scale(1.1);
+}
+
+.link-caracteristicas {
+  color: #ffffff;
+  transition: 0.5S;
+}
+
+.link-caracteristicas:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.row-players {
+  width: 100%;
+  margin-left: 0px;
+  margin-bottom: 15px;
+}
+
+.link-card:hover {
+  transform: scale(2.32);
+}
+
+.col-card-player {
+  margin-bottom: 20px;
+}
+

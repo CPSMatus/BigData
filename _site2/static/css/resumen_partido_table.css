@@ -1,0 +1,86 @@
+.h_jugador {
+  color: rgb(225,225,225);
+}
+
+.py-3 {
+  background: rgb(0,0,0);
+  border-width: 1px;
+  border-style: solid;
+}
+
+.header_background{
+  margin-top: 35px;
+  border-color: rgb(133,135,150);
+  border-top-color: #646474;
+  border-right-color: #646474;
+  border-bottom-color: #646474;
+  border-left-color: #646474;"
+}
+#card-header-participa {
+  border-bottom-width: 5px;
+  border-bottom-color: rgb(63,242,0);
+  background: rgb(28,28,28);
+}
+
+
+
+#div-vs-header{
+  border-color: rgb(69,134,198);
+border-bottom: 3px solid rgb(69, 134, 198);
+}
+
+#select-posicion{
+  background: rgb(28,28,28);
+color: rgb(118,118,118);
+border-top-style: none;
+border-right-style: none;
+border-bottom-color: rgb(118,118,118);
+border-left-style: none;
+}
+
+.table_title{
+  color: rgb(255,255,255);
+text-align: center;
+}
+
+.jugador_info{
+  color: rgb(235,235,235);
+text-decoration: none;
+}
+
+.hlink_jugador{
+background: none!important;
+ border: none;
+ padding: 0!important;
+ /*optional*/
+ font-family: arial, sans-serif;
+ /*input has OS specific font-family*/
+ color: rgb(235,235,235);
+ text-decoration: underline;
+ cursor: pointer;
+}
+
+
+
+.hlink_jugador:hover{
+  color:rgb(69,124,198);
+}
+
+.jugadores-table-body{
+  background: rgb(28,28,28);
+border-bottom-color: rgb(133, 135, 150);
+}
+
+.heading_resumen_partido{
+  color: rgb(255,255,255);
+}
+
+/* _tables.scss:64 */
+.table-borderless {
+  th,
+  td,
+  thead th,
+  tbody + tbody {
+    border: 0;
+  }
+}

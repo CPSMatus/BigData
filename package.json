@@ -1,0 +1,45 @@
+{
+  "name": "_site2",
+  "version": "1.0.0",
+  "description": "Thanks for downloading this template!",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode  development --watch ./_site2/frontend/src/index.js --output-path  ./_site2/frontend/static/frontend",
+    "build": "webpack --mode  production ./_site2/frontend/src/index.js --output-path  ./_site2/frontend/static/frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CPSMatus/Analisis-Datos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CPSMatus/Analisis-Datos/issues"
+  },
+  "homepage": "https://github.com/CPSMatus/Analisis-Datos#readme",
+  "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "webpack": "^5.67.0",
+    "webpack-bundle-tracker": "^1.4.0",
+    "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "axios": "^0.25.0",
+    "jquery": "^3.6.0",
+    "prop-types": "^15.8.1",
+    "react": "^17.0.2",
+    "react-alert": "^7.0.3",
+    "react-alert-template-basic": "^1.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1",
+    "webpack-dev-server": "^4.7.3"
+  }
+}

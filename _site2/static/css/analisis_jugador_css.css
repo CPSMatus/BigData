@@ -1,0 +1,28 @@
+.cell_left {
+  text-align: center;
+}
+
+.cell_right {
+  text-align: right;
+}
+
+.name_class {
+  width: 144px;
+  height: 109px;
+}
+
+.radio_div {
+  width: 50%;
+}
+
+.custom-table {
+  border-collapse: collapse;
+  width: 100%;
+  border: solid 1px #c0c0c0;
+  font-family: open sans;
+  padding: 8px;
+  outline: 0;
+  background-color: transparent;
+  font-size: 13px;
+}
+

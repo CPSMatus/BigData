@@ -1,0 +1,514 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Dashboard - Brand</title>
+<link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&amp;display=swap">
+<link rel="stylesheet" href="{% static '/fonts/fontawesome-all.min.css'%}">
+<link rel="stylesheet" href="{% static '/fonts/font-awesome.min.css'%}">
+<link rel="stylesheet" href="{% static '/fonts/fontawesome5-overrides.min.css'%}">
+<link rel="stylesheet" href="{% static '/css/analisis_equipo_css.css'%}">
+<link rel="stylesheet" href="{% static '/css/resumen_partido.css'%}">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
+
+</head>
+<body id="page-top" style="background: #dae0e7;">
+<div id="wrapper" style="background: #a5b4c6;">
+<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(33,33,33);border-right-width: 1px;border-right-style: none;">
+<div class="container-fluid d-flex flex-column p-0">
+<a class="navbar-brand" href="#">
+<div class="justify-content-center align-items-center align-content-center" style="width: 100px;">
+<a href="inicio.html">
+<img class="img-fluid d-none d-xxl-flex align-items-center align-content-center" src="{% static '/img/Escudo_Puebla_1@4x.png'%}">
+</a>
+</div>
+</a>
+<a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+<div class="sidebar-brand-text mx-3">
+<span>CLUB PUEBLA</span>
+</div>
+</a>
+<ul class="navbar-nav text-light" id="accordionSidebar">
+<li class="nav-item">
+<a class="nav-link" href="resumen_entrenamiento_table2.html">
+<i class="fas fa-tachometer-alt">
+</i>
+<span>Dashboard</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="analisis_torneo_table.html">
+<i class="fa fa-calendar">
+</i>
+<span>Jornadas</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="table.html">
+<i class="fas fa-table">
+</i>
+<span>Sessions</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="login.html">
+<i class="fa fa-bar-chart">
+</i>
+<span>Logistica</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="register.html">
+<i class="fas fa-shoe-prints">
+</i>
+<span>Administracion</span>
+</a>
+</li>
+</ul>
+<div class="text-center d-none d-md-inline">
+<button class="btn rounded-circle border-0" id="sidebarToggle" type="button">
+</button>
+</div>
+</div>
+</nav>
+<div class="d-flex flex-column" id="content-wrapper">
+<div id="content" style="height: auto;">
+<nav class="navbar navbar-light navbar-expand-md">
+<div class="container-fluid">
+<a class="navbar-brand" href="#">Brand</a>
+<button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+<span class="visually-hidden">Toggle navigation</span>
+<span class="navbar-toggler-icon">
+</span>
+</button>
+<div class="collapse navbar-collapse" id="navcol-1">
+<ul class="navbar-nav">
+<li class="nav-item">
+<a class="nav-link active" href="#">First Item</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">Second Item</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">Third Item</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="container-fluid" id="main_container" style="background: rgb(28,28,28);margin-bottom: 10px;">
+<div class="row" style="height: auto;">
+<div class="col-sm-8 col-md-5 col-lg-5 col-xl-6 col-xxl-6" style="height: 100%;">
+<h1 id="title">NOMBRE TORNEO</h1>
+</div>
+<div class="col-sm-4 col-md-2 col-lg-4 col-xl-3 col-xxl-3" style="height: 100%;padding: 0px;padding-right: 12px;padding-left: 12px;">
+<select id="select-torneo">
+<optgroup label="TORNEO">
+<option value="12" selected="">AP2021</option>
+<option value="13">CL2022</option>
+</optgroup>
+</select>
+</div>
+<div class="col-sm-12 col-md-5 col-lg-3 d-flex d-sm-flex d-md-flex d-lg-flex justify-content-center justify-content-sm-end justify-content-md-end justify-content-lg-end">
+<button class="btn btn-primary" id="btn-generate-report" type="button">
+<i class="fas fa-download fa-sm text-white-50">
+</i>
+<span id="span-gr" style="font-size: 14px;margin-left: 4px;">Generate Report</span>
+</button>
+</div>
+</div>
+<div class="row" style="margin-top: 15px;margin-left: -12px;margin-bottom: -10px;height: auto;">
+<div class="col-md-6 col-xl-3 mb-4">
+<div class="card shadow info_card" style="background: rgb(28,28,28);border-style: solid;border-color: rgb(79,79,79);">
+<div class="card-body">
+<div class="row align-items-center no-gutters">
+<div class="col me-2" id="card-1">
+<span id="card-title-1">APERTURA 2021</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6 col-xl-3 mb-4">
+<div class="card shadow info_card" style="background: rgb(28,28,28);border-style: solid;border-color: rgb(79,79,79);">
+<div class="card-body">
+<div class="row align-items-center no-gutters">
+<div class="col me-2">
+<span id="card-title-2">POSICION: #</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6 col-xl-3 mb-4">
+<div class="card shadow info_card" style="background: rgb(28,28,28);border-style: solid;border-color: rgb(79,79,79);">
+<div class="card-body">
+<div class="row align-items-center no-gutters">
+<div class="col me-2">
+<span id="card-title-3">PUNTOS: ##</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6 col-xl-3 mb-4">
+<div class="card shadow info_card" style="background: rgb(28,28,28);border-style: solid;border-color: rgb(79,79,79);">
+<div class="card-body">
+<div class="row align-items-center no-gutters">
+<div class="col me-2">
+<span id="card-title-4">PARTICIPACION: ##</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row" id="table_participacion_row" style="width: auto;height: auto;margin-top: 15px;">
+<div class="col" style="width: auto;height: auto;">
+<div class="table-responsive table-bordered" id="parcipacion" style="height: auto;">
+<table class="table .table-bordered">
+<thead id="table_header">
+<tr id="row_table_header">
+</tr>
+</thead>
+<tbody style="width: auto;">
+
+
+
+<tr>
+<td class="text-end" colspan="9" style="padding: 0px;">
+<span id="p-puntos">Puntos</span>
+</td>
+<td class="text-center puntos-cell">
+<div class="row row-puntos">
+<div class="col">
+<span class="span-puntos"></span>
+</div>
+</div>
+</td>
+
+
+</tr>
+<tr>
+<td rowspan="3" colspan="9">
+</td>
+<td id="marcador" rowspan="3">
+<p class="p-rotate">Marcador</p>
+</td>
+
+{%for jornada in jornadas%}
+<td style="padding: 0px;">
+<div class="row" style="width: 100%;margin: 0px;">
+<div class="col" style="width: 50%;">
+<div class="row">
+<div class="col text-center d-xxl-flex justify-content-xxl-center right-margin bottom-margin">
+<span>J{{jornada.n_jornada}}</span>
+</div>
+</div>
+<div class="row">
+<div class="col text-center d-xxl-flex justify-content-xxl-center" style="border-right: 0.5px solid rgb(255,255,255) ;">
+<span> {% if jornada.is_local %}
+  L
+  {% else %}V
+  {%endif%}</span>
+</div>
+</div>
+</div>
+
+<div class="col text-start  d-xl-flex d-lg-flex d-md-flex d-sm-flex  d-flex d-xxl-flex justify-content-xxl-center align-items-sm-center align-items-xxl-center  align-items-xl-center align-items-lg-center align-items-md-center align-items-center right-margin" style="width: 50%; padding-left: 5px;">
+<span>Calif</span>
+</div>
+</div>
+</td>
+{%endfor%}
+</tr>
+
+
+
+<tr>
+
+<td class="text-center d-xxl-flex justify-content-xxl-center right-margin">
+<span id = "goles_favor">
+  {% if jornada.goles_favor %}
+  {{ jornada.goles_favor }}
+  {% else %}0
+  {%endif%}
+</span>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td class="text-center d-xxl-flex justify-content-xxl-center" style="border-right-width: 0.5px;">
+<span id = "goles_contra">  {% if jornada.goles_favor %}
+  {{ jornada.goles_favor }}
+  {% else %}0
+  {%endif%}
+</span>
+</td>
+</tr>
+
+
+<tr id="header-row" style="width: auto;">
+<td class="col-num col-border">
+<p style="margin-top: 100px;">Num</p>
+</td>
+<th class="col-md-4 col-border">
+<p style="margin-top: 100px;margin-right: 20px;margin-left: 20px;">Nombre</p>
+</th>
+<td class="col-md-4 col-border">
+<p class="p-rotate two-lines">Fecha Nacimiento</p>
+</td>
+<td class="col-md-4 col-border">
+<p class="p-rotate">EDAD</p>
+</td>
+<td class="col-md-4 col-border" style="padding: 0px;">
+<p class="p-rotate" style="margin-top: 71px;">Nacionalidad</p>
+</td>
+<td class="col-border col-md-4">
+<p class="p-rotate two-lines">Goles Anotados</p>
+</td>
+<td class="col-md-4 col-border">
+<p class="p-rotate two-lines">Tarjetas Amarillas</p>
+</td>
+<td class="col-md-4 col-border">
+<p class="p-rotate two-lines">Tarjetas Rojas</p>
+</td>
+<td class="col-md-4 col-border">
+<p class="p-rotate">Posicion</p>
+</td>
+
+
+{%for jornada in jornadas%}
+<td class="col-md-4 col-border">
+
+<p class="p-rotate">{{jornada.nombre}}</p>
+
+</td>
+{%endfor%}
+
+<td class="col-md-4 col-border">
+<p class="p-rotate two-lines">% Participacion</p>
+</td>
+<td class="col-md-4 col-border">
+<p class="p-rotate two-lines">TOTAL MIN JUGADOS</p>
+</td>
+<td class="col-md-4">
+<p class="p-rotate" style="height: 23px;">CALIF</p>
+</td>
+</tr>
+<tr style="height: 2px;">
+
+
+
+{%for jugador in jugadores%}
+<td class="text-center col-num" scope="row">{{jugador.numero_jugador}}&nbsp;</td>
+<td class="name-col col-md-2">{{jugador.wimu_alias}}</td>
+<td>{{jugador.fecha_nacimiento}}</td>
+<td class="text-center">18+</td>
+<td class="text-center">E</td>
+<td class="text-center gol-col">0</td>
+<td class="text-center">1</td>
+<td class="text-center">0</td>
+<td>{{jugador.nombre_posicion}}</td>
+
+{%for jornada in jornadas%}
+  <th class="col-sm-6" style="padding: 0px;padding-top: 0px;height: 100%;">
+  <div class="row" style="width: 100%;margin-right: 0px;margin-left: 0px;height: 100%;">
+
+    <div class="col" style="width: 50%;height: 50%;">
+    <div class="row" style="height: 100%;">
+    <div class="col d-md-flex justify-content-md-center align-items-md-center inter-column" style="height: 100%;">
+        <span>TR</span>
+
+    </div>
+    </div>
+    </div>
+
+  </div>
+  </th>
+{%endfor%}
+
+<th class="text-center col-sm-6 d-table-cell" style="border-left-width: 0.5px;border-left-style: solid;">
+<span class="span-text">%%</span>
+</th>
+<th class="text-center col-sm-6 d-table-cell" style="border-left-width: 0.5px;border-left-style: solid;">
+<span class="span-text">%%</span>
+</th>
+<th class="text-center col-sm-6 d-table-cell" style="border-left-width: 0.5px;border-left-style: solid;">
+<span class="span-text">%%</span>
+</th>
+</tr>
+{%endfor%}
+
+
+
+
+
+
+
+
+</tbody>
+</table>
+</div>
+</div>
+<div class="col d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end justify-content-xxl-end" id="btn-apply">
+<button class="btn btn-primary" id="btn-generate-report-1" type="button" style="background: #425c7c;">
+<span id="span-gr-1" style="font-size: 14px;margin-left: 4px;">Apply</span>
+</button>
+</div>
+</div>
+<div class="row" id="radio_buttons_row-1" style="margin-top: 20px;">
+<div class="col">
+<form class="d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;">
+  <div class="col col-md-4" style="width: 50%;">
+  <div class="row d-md-flex justify-content-md-center" style="margin-left: 0px;width: 100%;">
+  <div class="col-md-1 d-md-flex justify-content-md-center align-items-md-center" style="padding-right: 0px;">
+  <input type="radio" id="by_jornada-1" name="select_team_chart">
+  </div>
+  <div class="col-md-4" style="padding-left: 0px;">
+  <span>&nbsp;x Jornada</span>
+  </div>
+  </div>
+  </div>
+  <div class="col col-md-4" style="width: 50%;">
+  <div class="row d-md-flex justify-content-md-center" style="width: 100%;margin-left: 0px;">
+  <div class="col-md-1 d-md-flex justify-content-md-center align-items-md-center" style="padding-right: 0px;">
+  <input type="radio" id="by_jornada-4" name="select_team_chart">
+  </div>
+  <div class="col-md-4" style="padding-left: 0px;">
+  <span>&nbsp;x Minutos</span>
+  </div>
+  </div>
+  </div>
+</form>
+</div>
+</div>
+<div class="row" style="margin-top: 15px;">
+<div class="col-md-12 col-xl-6 mb-4"> <div class="card" style="border-style: solid;border-color: rgb(79,79,79); background:rgb(28,28,28);"> <div class="card-header d-flex justify-content-between align-items-center" style="background: rgb(14,15,16);border-style: none;border-color: rgb(79,79,79);"> <h1 style="color: rgb(255,255,255);font-size: 16px;">Grafica Distance (m)</h1> <div class="dropdown no-arrow">
+<button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">
+<i class="fas fa-ellipsis-v text-gray-400">
+</i>
+</button> <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in"> <p class="text-center dropdown-header">dropdown header:</p>
+<a class="dropdown-item" href="#"> Action</a>
+<a class="dropdown-item" href="#"> Another action</a> <div class="dropdown-divider">
+</div>
+<a class="dropdown-item" href="#"> Something else here</a> </div> </div> </div> <div class="card-body" width = "100%" height = 100%> <div class="bg-dark chart-area" >
+<canvas height="320" width="228" style="display: block;width: 228px;height: 320px;">
+</canvas> </div> </div> </div> </div>
+<div class="col-md-12 col-xl-6 mb-4"> <div class="card" style="border-style: solid;border-color: rgb(79,79,79); background:rgb(28,28,28);"> <div class="card-header d-flex justify-content-between align-items-center" style="background: rgb(14,15,16);border-style: none;border-color: rgb(79,79,79);"> <h1 style="color: rgb(255,255,255);font-size: 16px;">Distance HSR</h1> <div class="dropdown no-arrow">
+<button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">
+<i class="fas fa-ellipsis-v text-gray-400">
+</i>
+</button> <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in"> <p class="text-center dropdown-header">dropdown header:</p>
+<a class="dropdown-item" href="#"> Action</a>
+<a class="dropdown-item" href="#"> Another action</a> <div class="dropdown-divider">
+</div>
+<a class="dropdown-item" href="#"> Something else here</a> </div> </div> </div> <div class="card-body" width = "100%" height = 100%> <div class="bg-dark chart-area" >
+<canvas height="320" width="228" style="display: block;width: 228px;height: 320px;">
+</canvas> </div> </div> </div> </div>
+</div>
+<div class="row" style="margin-top: 10px;">
+<div class="col-md-12 col-xl-6 mb-4"> <div class="card" style="border-style: solid;border-color: rgb(79,79,79); background:rgb(28,28,28);"> <div class="card-header d-flex justify-content-between align-items-center" style="background: rgb(14,15,16);border-style: none;border-color: rgb(79,79,79);"> <h1 style="color: rgb(255,255,255);font-size: 16px;">Sprints</h1> <div class="dropdown no-arrow">
+<button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">
+<i class="fas fa-ellipsis-v text-gray-400">
+</i>
+</button> <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in"> <p class="text-center dropdown-header">dropdown header:</p>
+<a class="dropdown-item" href="#"> Action</a>
+<a class="dropdown-item" href="#"> Another action</a> <div class="dropdown-divider">
+</div>
+<a class="dropdown-item" href="#"> Something else here</a> </div> </div> </div> <div class="card-body" width = "100%" height = 100%> <div class="bg-dark chart-area" >
+<canvas height="320" width="228" style="display: block;width: 228px;height: 320px;">
+</canvas> </div> </div> </div> </div>
+<div class="col-md-12 col-xl-6 mb-4"> <div class="card" style="border-style: solid;border-color: rgb(79,79,79); background:rgb(28,28,28);"> <div class="card-header d-flex justify-content-between align-items-center" style="background: rgb(14,15,16);border-style: none;border-color: rgb(79,79,79);"> <h1 style="color: rgb(255,255,255);font-size: 16px;">Distance HSR</h1> <div class="dropdown no-arrow">
+<button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">
+<i class="fas fa-ellipsis-v text-gray-400">
+</i>
+</button> <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in"> <p class="text-center dropdown-header">dropdown header:</p>
+<a class="dropdown-item" href="#"> Action</a>
+<a class="dropdown-item" href="#"> Another action</a> <div class="dropdown-divider">
+</div>
+<a class="dropdown-item" href="#"> Something else here</a> </div> </div> </div> <div class="card-body" width = "100%" height = 100%> <div class="bg-dark chart-area" >
+<canvas height="320" width="228" style="display: block;width: 228px;height: 320px;">
+</canvas> </div> </div> </div> </div>
+</div>
+<div class="row" id="radio_buttons_row-2" style="margin-top: 20px;">
+<div class="col">
+<form class="d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;">
+  <div class="col col-md-4" style="width: 50%;">
+  <div class="row d-md-flex justify-content-md-center" style="margin-left: 0px;width: 100%;">
+  <div class="col-md-1 d-md-flex justify-content-md-center align-items-md-center" style="padding-right: 0px;">
+  <input type="radio" id="by_jornada-2" name="select_team_chart">
+  </div>
+  <div class="col-md-4" style="padding-left: 0px;">
+  <span>&nbsp;x Jornada</span>
+  </div>
+  </div>
+  </div>
+  <div class="col col-md-4" style="width: 50%;">
+  <div class="row d-md-flex justify-content-md-center" style="width: 100%;margin-left: 0px;">
+  <div class="col-md-1 d-md-flex justify-content-md-center align-items-md-center" style="padding-right: 0px;">
+  <input type="radio" id="by_jornada-3" name="select_team_chart">
+  </div>
+  <div class="col-md-4" style="padding-left: 0px;">
+  <span>&nbsp;x Minutos</span>
+  </div>
+  </div>
+  </div>
+</form>
+</div>
+</div>
+<div class="row" style="margin-top: 25px;">
+<div class="col-md-12 col-xl-6 mb-4"> <div class="card" style="border-style: solid;border-color: rgb(79,79,79); background:rgb(28,28,28);"> <div class="card-header d-flex justify-content-between align-items-center" style="background: rgb(14,15,16);border-style: none;border-color: rgb(79,79,79);"> <h1 style="color: rgb(255,255,255);font-size: 16px;">Golstats Ofensiva</h1> <div class="dropdown no-arrow">
+<button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">
+<i class="fas fa-ellipsis-v text-gray-400">
+</i>
+</button> <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in"> <p class="text-center dropdown-header">dropdown header:</p>
+<a class="dropdown-item" href="#"> Action</a>
+<a class="dropdown-item" href="#"> Another action</a> <div class="dropdown-divider">
+</div>
+<a class="dropdown-item" href="#"> Something else here</a> </div> </div> </div> <div class="card-body" width = "100%" height = 100%> <div class="bg-dark chart-area" >
+<canvas height="320" width="228" style="display: block;width: 228px;height: 320px;">
+</canvas> </div> </div> </div> </div>
+<div class="col-md-12 col-xl-6 mb-4"> <div class="card" style="border-style: solid;border-color: rgb(79,79,79); background:rgb(28,28,28);"> <div class="card-header d-flex justify-content-between align-items-center" style="background: rgb(14,15,16);border-style: none;border-color: rgb(79,79,79);"> <h1 style="color: rgb(255,255,255);font-size: 16px;">Golstats Defensiva</h1> <div class="dropdown no-arrow">
+<button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">
+<i class="fas fa-ellipsis-v text-gray-400">
+</i>
+</button> <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in"> <p class="text-center dropdown-header">dropdown header:</p>
+<a class="dropdown-item" href="#"> Action</a>
+<a class="dropdown-item" href="#"> Another action</a> <div class="dropdown-divider">
+</div>
+<a class="dropdown-item" href="#"> Something else here</a> </div> </div> </div> <div class="card-body" width = "100%" height = 100%> <div class="bg-dark chart-area" >
+<canvas height="320" width="228" style="display: block;width: 228px;height: 320px;">
+</canvas> </div> </div> </div> </div>
+</div>
+</div>
+</div>
+<footer class="sticky-footer" style="background: rgb(30,30,30);margin-top: 0px;margin-left: 0px;border-color: rgb(69,134,198);border-top: 1px solid rgb(69,124,198);height: 90px;">
+<div class="container my-auto">
+<div class="text-center my-auto copyright">
+<span>Copyright © Brand 2021</span>
+</div>
+</div>
+</footer>
+</div>
+<a class="border rounded d-inline scroll-to-top" href="#page-top">
+<i class="fas fa-angle-up">
+</i>
+</a>
+</div>
+<script src="{% static '/bootstrap/js/bootstrap.min.js'%}">
+</script>
+<script src="{% static '/js/theme.js'%}">
+</script>
+</body>
+</html>

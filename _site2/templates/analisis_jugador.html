@@ -1,0 +1,549 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Dashboard - Brand</title>
+  <link rel="stylesheet" href = "{% static '/bootstrap/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&amp;display=swap">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
+
+  <link rel="stylesheet" href = "{% static '/fonts/fontawesome-all.min.css'%}">
+  <link rel="stylesheet" href = "{% static '/fonts/font-awesome.min.css'%}">
+  <link rel="stylesheet" href = "{% static '/fonts/fontawesome5-overrides.min.css'%}">
+  <link rel="stylesheet" href = "{% static '/css/Header-Blue.css'%}">
+  <link rel="stylesheet" href = "{% static '/css/Header-Dark.css'%}">
+  <link rel="stylesheet" href = "{% static '/css/Navigation-Clean.css'%} ">
+  <link rel="stylesheet" href = "{% static '/css/untitled-3.css'%}">
+  <link rel="stylesheet" href = "{% static '/css/untitled.css'%}">
+</head>
+<body id="page-top" style="background: rgb(28,28,28);"> <div id="wrapper" style="background: rgb(28,28,28);">
+  <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(33,33,33);border-right-width: 1px;border-right-style: none;">
+  <div class="container-fluid d-flex flex-column p-0">
+    <a class="navbar-brand" href="#">
+      <div class="justify-content-center align-items-center align-content-center" style="width: 100px;">
+    <a href="inicio.html">
+<img class="img-fluid d-none d-xxl-flex align-items-center align-content-center" src="{% static '/img/1200px-Club_Puebla_logo.svg.png'%}">
+</a> </div> </a> <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+<div class="sidebar-brand-text mx-3">
+<span>CLUB PUEBLA</span>
+</div>
+</a>
+<ul class="navbar-nav text-light" id="accordionSidebar">
+<li class="nav-item">
+<a class="nav-link" href="resumen_entrenamiento_table2.html"> <i class="fas fa-tachometer-alt">
+</i>
+<span>Dashboard</span>
+</a>
+</li> <li class="nav-item">
+<a class="nav-link" href="analisis_torneo_table.html">
+<i class="fa fa-calendar">
+</i>
+<span>Jornadas</span>
+</a>
+</li> <li class="nav-item">
+<a class="nav-link" href="table.html">
+<i class="fas fa-table">
+</i>
+<span>Sessions</span>
+</a>
+</li> <li class="nav-item">
+<a class="nav-link" href="login.html">
+<i class="fa fa-bar-chart">
+</i>
+<span>Logistica</span>
+</a>
+</li> <li class="nav-item">
+<a class="nav-link" href="register.html">
+<i class="fas fa-shoe-prints">
+</i>
+<span>Administracion</span>
+</a>
+</li>
+</ul> <div class="text-center d-none d-md-inline">
+<button class="btn rounded-circle border-0" id="sidebarToggle" type="button">
+</button> </div> </div> </nav> <div class="d-flex flex-column" id="content-wrapper" style="background: rgb(28,28,28);"> <div id="content" style="background: rgb(28,28,28);">
+<div class="row" style="margin-left: 0px;background: #dae0e7;margin-right: 0px;">
+<div class="col" style="padding-left: -12px;margin-left: 0px;width: 1118px;margin-right: 12px;background: #dae0e7;">
+<nav class="navbar navbar-light navbar-expand-md" style="width: 1111px;margin-left: 0px;">
+<div class="container-fluid">
+<a class="navbar-brand" href="#" style="color: rgb(69,134,198);">Inicio</a>
+<button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+<span class="visually-hidden">Toggle navigation</span>
+<span class="navbar-toggler-icon">
+</span>
+</button>
+<div class="collapse navbar-collapse" id="navcol-1" style="width: 1150.83px;">
+<ul class="navbar-nav">
+<li class="nav-item">
+<a class="nav-link active" href="#" style="color: rgb(69,134,198);">Participantes</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#" style="color: rgb(69,134,198);">Unidades</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#" style="color: rgb(69,134,198);">Información Entrenamiento</a>
+</li>
+</ul>
+</div>
+<div class="d-xxl-flex ms-auto justify-content-xxl-end align-items-xxl-center" style="width: 596px;">
+<input type="text" style="height: 38px;width: 362px;background: #dae0e7;border-style: none;border-top-style: none;border-bottom-style: solid;border-bottom-color: rgb(118, 118, 118);border-left-style: none;" placeholder="Search">
+<button class="btn btn-primary" type="button" style="width: 64px;background: rgb(69,134,198);">
+<i class="fa fa-search">
+</i>
+<span>
+</span>
+</button>
+</div>
+</div>
+</nav>
+</div>
+</div>
+<div class="container-fluid" style="background: rgb(28,28,28);padding-right: 24px;padding-left: 0px;">
+<div class="row" style="margin-top: 10px;margin-left: 0px;">
+<div class="col">
+<div class="d-sm-flex justify-content-between align-items-center mb-4">
+<h3 style="color: rgb(213,213,213);">Analisis de JUGADOR en JornadaXX</h3>
+</div>
+</div>
+<div class="col text-end">
+<a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" style="color: var(--bs-white);background: #425c7c;">
+<i class="fas fa-download fa-sm text-white-50">
+</i>&nbsp;Generate Report</a>
+</div>
+</div>
+<div class="row" style="margin-left: 0px;">
+<div class="col-md-6 col-xl-3 mb-4">
+<div class="card shadow border-start-success py-2" style="background: rgb(28,28,28);height: 95px;">
+<div class="card-body">
+<div class="row align-items-center no-gutters">
+<div class="col-auto">
+<img src="{% static '/img/1_ico.jpg">
+</div>
+<div class="col me-2">
+<div class="text-uppercase text-success fw-bold text-xs mb-1">
+<span style="color: rgb(28, 200, 138);">Amaury escoto</span>
+</div>
+<div class="text-dark fw-bold h5 mb-0" style="font-size: 15px;">
+<span style="color: rgb(255,255,255);">Media Punta</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6 col-xl-3 mb-4">
+<div class="card shadow border-start-success py-2" style="background: rgb(28,28,28);">
+<div class="card-body">
+<div class="row align-items-center no-gutters">
+<div class="col me-2">
+<div class="text-uppercase text-success fw-bold text-xs mb-1">
+<span style="color: rgb(28, 200, 138);">Tiempo de JUEGO</span>
+</div>
+<div class="text-dark fw-bold h5 mb-0">
+<span>60:05 min</span>
+</div>
+</div>
+<div class="col-auto">
+<i class="fa fa-clock-o fa-2x text-gray-300">
+</i>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6 col-xl-3 mb-4">
+<div class="card shadow border-start-info py-2" style="background: rgb(28,28,28);">
+<div class="card-body">
+<div class="row align-items-center no-gutters">
+<div class="col me-2">
+<div class="text-uppercase text-info fw-bold text-xs mb-1">
+<span>distance</span>
+</div>
+<div class="row g-0 align-items-center">
+<div class="col-auto">
+<div class="text-dark fw-bold h5 mb-0 me-3">
+<span>50%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-auto">
+<i class="fas fa-tachometer-alt fa-2x text-gray-300">
+</i>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6 col-xl-3 mb-4">
+<div class="card shadow border-start-warning py-2" style="background: rgb(28,28,28);">
+<div class="card-body">
+<div class="row align-items-center no-gutters">
+<div class="col me-2">
+<div class="text-uppercase text-warning fw-bold text-xs mb-1">
+<span>
+<strong>DISTANCE (M)</strong>
+</span>
+</div>
+<div class="text-dark fw-bold h5 mb-0">
+<span>
+<strong>1092.5</strong>
+</span>
+</div>
+</div>
+<div class="col-auto">
+<i class="fas fa-running fa-2x text-gray-300">
+</i>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="row" style="margin-left: 0px;">
+<div class="col-md-12 col-xl-6" style="width: 578.5px;">
+
+
+<div class="card d-inline" style="margin-bottom: 24px;height: 410px;width: 545.5px;border-style: solid;border-color: rgb(23,23,23);">
+<div class="card-header d-flex justify-content-between align-items-center" style="background: rgb(205,227,219);padding: 8px 16px;margin-top: -2px;">
+<h3 class="text-start" style="color: #24b054;font-size: 16px;border-color: #737d95;">Distance (m)</h3>
+<div class="dropdown no-arrow">
+<button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(78, 115, 223);">
+<i class="fas fa-ellipsis-v text-gray-400" style="color: rgb(28,200,138);">
+</i>
+</button>
+<div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
+<p class="text-center dropdown-header">dropdown header:</p>
+<a class="dropdown-item" href="#">&nbsp;Action</a>
+<a class="dropdown-item" href="#">&nbsp;Another action</a>
+<div class="dropdown-divider">
+</div>
+<a class="dropdown-item" href="#">&nbsp;Something else here</a>
+</div>
+</div>
+</div>
+
+<div class="card-body text-dark" style="background: rgb(28,28,28);border: 1px solid rgb(255,255,255) ;">
+<div class="bg-dark chart-area" style="background: rgb(255,255,255);">
+
+<!-- Comienza chart Distancia-->
+<style type = "text/css">
+  .chart-container{
+    width: 100%;
+    height: : 200%;
+  }
+  </style>
+
+
+<div class="chart-container" >
+    <canvas id="myChart"></canvas>
+
+
+</div>
+
+<script>
+//Receiving parameters
+var x_interval = {{labels|safe}};
+var df = {{distance|safe}};
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: x_interval,
+        datasets: [{
+            label: 'Distance (m)',
+            data: df,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+
+
+
+
+</div>
+</div>
+</div>
+
+
+</div>
+
+<div class="col-md-12 col-xl-6" style="width: 577.656px;">
+<div class="card d-inline" style="margin-bottom: 24px;height: 410px;width: 545.5px;border-style: solid;border-color: rgb(28,28,28);">
+<div class="card-header d-flex justify-content-between align-items-center" style="background: rgb(205,227,219);padding: 8px 16px;margin-top: -2px;">
+<h3 class="text-start" style="color: #24b054;font-size: 16px;border-color: #737d95;">Grafica 3</h3>
+<div class="dropdown no-arrow">
+<button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(78, 115, 223);">
+<i class="fas fa-ellipsis-v text-gray-400" style="color: rgb(28,200,138);">
+</i>
+</button>
+<div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
+<p class="text-center dropdown-header">dropdown header:</p>
+<a class="dropdown-item" href="#">&nbsp;Action</a>
+<a class="dropdown-item" href="#">&nbsp;Another action</a>
+<div class="dropdown-divider">
+</div>
+<a class="dropdown-item" href="#">&nbsp;Something else here</a>
+</div>
+</div>
+</div>
+<div class="card-body text-dark" style="background: rgb(28,28,28);border: 1px solid var(--bs-white);">
+<div class="bg-dark chart-area" style="background: rgb(255,255,255);">
+
+
+
+  <!-- Comienza chart Distancia-->
+  <canvas id="hse_individual_chart" width="400" height="250"></canvas>
+  <script>
+    var x_interval = {{labels2|safe}};
+    var df = {{high_intensity_distance_array|safe}};
+  const ctx2 = document.getElementById('hse_individual_chart').getContext('2d');
+  const hse_individual_chart = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+          labels: x_interval,
+          datasets: [{
+              label: 'Distance (m)',
+              data: df,
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+  </script>
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+<div class="card d-inline" style="margin-bottom: 24px;height: 410px;width: 545.5px;border-style: solid;border-color: rgb(28,28,28);">
+<div class="card-header d-flex justify-content-between align-items-center" style="background: rgb(205,227,219);padding: 8px 16px;margin-top: -2px;">
+<h3 class="text-start" style="color: #24b054;font-size: 16px;border-color: #737d95;">Grafica4</h3>
+<div class="dropdown no-arrow">
+<button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(78, 115, 223);">
+<i class="fas fa-ellipsis-v text-gray-400" style="color: rgb(28,200,138);">
+</i>
+</button>
+<div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
+<p class="text-center dropdown-header">dropdown header:</p>
+<a class="dropdown-item" href="#">&nbsp;Action</a>
+<a class="dropdown-item" href="#">&nbsp;Another action</a>
+<div class="dropdown-divider">
+</div>
+<a class="dropdown-item" href="#">&nbsp;Something else here</a>
+</div>
+</div>
+</div>
+<div class="card-body text-dark" style="background: rgb(28,28,28);border: 1px solid var(--bs-white);">
+<div class="chart-area" style="background: rgb(255,255,255);">
+
+
+
+    <!-- Comienza chart Distancia-->
+    <canvas id="playerDistance_vs_teamDistance" width="400" height="250"></canvas>
+    <script>
+      var x_interval = {{labels2|safe}};
+      var df = {{distance|safe}};
+      var df_team = {{distance_array_mean_team|safe}};
+    const ctx4 = document.getElementById('playerDistance_vs_teamDistance').getContext('2d');
+    const playerDistance_vs_teamDistance = new Chart(ctx4, {
+        type: 'line',
+        data: {
+            labels: x_interval,
+            datasets: [{
+                label: 'Distance (m)',
+                data: df,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            },{
+                label: 'Distance (m)',
+                data: distance_array_mean_team,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    </script>
+
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row" style="margin-left: 0px;">
+<div class="col">
+<div class="row">
+<div class="col-lg-6 mb-4">
+<div class="card textwhite bg-primary text-white shadow">
+<div class="card-body">
+<p class="m-0">Ultima sesión Fisio</p>
+<p class="text-white-50 small m-0">10-09-2021</p>
+</div>
+</div>
+</div>
+<div class="col-lg-6 mb-4">
+<div class="card textwhite bg-success text-white shadow">
+<div class="card-body">
+<p class="m-0">Ultima sesión nutricional</p>
+<p class="text-white-50 small m-0">11-08-2021</p>
+</div>
+</div>
+</div>
+<div class="col-lg-6 mb-4">
+<div class="card textwhite bg-info text-white shadow">
+<div class="card-body">
+<p class="m-0">Ultima sesión medica</p>
+<p class="text-white-50 small m-0">17-07-2021</p>
+</div>
+</div>
+</div>
+<div class="col-lg-6 mb-4">
+<div class="card textwhite bg-warning text-white shadow">
+<div class="card-body">
+<p class="m-0">Ultima sesión psicologic</p>
+<p class="text-white-50 small m-0">10-07-2021</p>
+</div>
+</div>
+</div>
+<div class="col-lg-6 mb-4">
+<div class="card textwhite bg-danger text-white shadow">
+</div>
+</div>
+<div class="col-lg-6 mb-4">
+<div class="card textwhite bg-secondary text-white shadow">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="sticky-footer" style="background: rgb(30,30,30);margin-top: 5px;margin-left: 0px;border-color: rgb(69,134,198);border-top: 1px solid rgb(69,124,198);">
+<div class="container my-auto">
+<div class="text-center my-auto copyright">
+<span>Copyright © Brand 2021</span>
+</div>
+</div>
+</footer>
+</div>
+<a class="border rounded d-inline scroll-to-top" href="#page-top">
+<i class="fas fa-angle-up">
+</i>
+</a>
+</div>
+
+<script src="{% static '/bootstrap/js/bootstrap.min.js'%}">
+</script>
+<script src="{% static '/js/chart.min.js'%}">
+</script>
+<script src="{% static '/js/bs-init.js'%}">
+</script>
+<script src="{% static '/js/theme.js'%}">
+</script>
+
+</body>
+</html>

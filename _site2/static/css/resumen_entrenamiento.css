@@ -1,0 +1,202 @@
+.search_players {
+  width: 100%;
+  color: rgb(0, 0, 0);
+  background: rgb(28,28,28);
+  padding-right: 0px;
+  height: 100%;
+}
+
+#update_button {
+  font-size: 12px;
+  width: 100%;
+  height: 100%;
+  background: #096efa;
+}
+
+.card-no-participa {
+  margin-top: 139px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.card-header-p {
+  color: rgb(255,255,255);
+  font-weight: bold;
+  border-bottom-color: rgb(28,28,28);
+}
+
+.select-filter {
+  color: rgb(255,255,255);
+  background: rgb(28,28,28);
+  height: 35px;
+  border-radius: 9px;
+  width: 100%;
+  border-width: 2px;
+  border-top-style: none;
+  border-bottom-style: solid;
+  border-left-style: none;
+}
+
+#card-header-no-participa {
+  border-right-color: #666666;
+  border-bottom-width: 5px;
+  border-bottom-color: rgb(242,0,0);
+  background: rgb(28,28,28);
+}
+
+#card-body-particpa {
+  background: rgb(28,28,28);
+  border-bottom-color: rgb(133, 135, 150);
+}
+
+#col-add-participants {
+  border-bottom-color: rgb(133, 135, 150);
+  padding-left: 0px;
+}
+
+.col-add-participants {
+  margin-bottom: 15px;
+}
+
+.cell-nombre {
+  width: 120px;
+}
+
+.class-row {
+  margin-top: 15px;
+}
+
+@media (min-width: 992px) {
+  .col-righ-bottom {
+    margin-top: 0px;
+  }
+}
+
+.col-left-span {
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+.btn-group {
+  background: #096efa;
+  color: #ffffff;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+#jugador_cell {
+}
+
+.cell-info {
+  color: rgb(255,255,255);
+}
+
+#btn-update {
+  padding: 12px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.date-filter {
+  background: rgb(28,28,28);
+  color: rgb(143,142,142);
+  border-radius: 9px;
+  width: 100%;
+  height: 35px;
+}
+
+#card-header-participa {
+  border-bottom-width: 5px;
+  border-bottom-color: rgb(63,242,0);
+  background: rgb(28,28,28);
+}
+
+.py-3 {
+  background: rgb(0,0,0);
+  border-width: 1px;
+  border-style: solid;
+}
+
+.table_title_class {
+  width: 100px;
+  color: rgb(255,255,255);
+}
+
+#col-buscar-jugador {
+  padding: 12px;
+  padding-right: 0px;
+}
+
+#btn-filter-apply {
+  background: #096efa;
+}
+
+.col-txt-input {
+  padding: 12px;
+  padding-right: 0px;
+  height: 50%;
+  background: rgb(28,28,28);
+}
+
+@media (min-width: 768px) {
+  .col-right {
+  }
+}
+
+@media (min-width: 768px) {
+  #col-righ-bottom {
+    padding-left: 12px;
+  }
+}
+
+#btn-apply {
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  #col-righ-bottom {
+    padding-left: 0px;
+  }
+}
+
+.span-label {
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 992px) {
+  .col-right {
+    margin-top: 0px;
+  }
+}
+
+.col-right {
+  padding: 0px;
+  /*margin-top: 0px;*/
+}
+
+@media (min-width: 300px) {
+  .col-right {
+    margin-top: 15px;
+  }
+}
+
+#row-apply-button {
+  height: 100%;
+  width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.py-3 {
+  background: rgb(0,0,0);
+  border-width: 1px;
+  border-style: solid;
+}
+
+#card-microciclo {
+  background: rgb(28,28,28);
+}
+
