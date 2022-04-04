@@ -23,8 +23,8 @@ async function retrieve_jornada_info(){
 
 retrieve_jornada_info().then(datapoints =>{
 
-      var jornada = datapoints.items[0];
-  const  title  = document.getElementById("h_jornada").innerHTML = " en Jornada " +  jornada['n_jornada'] ;
+  var jornada = datapoints.items[0];
+  const  title  = document.getElementById("h_jornada").innerHTML = "   en Jornada " +  jornada['n_jornada'] ;
 
 
 });
@@ -53,6 +53,10 @@ retrieve_player_info().then(datapoints =>{
     var jugador = datapoints.items[0];
     //Llenar la informacion de la plantilla con la informacion del jugador
     var jugar_nombre = to_lower_case(jugador['wimu_alias']);
+    const player_photo = document.getElementById("player-photo");
+
+  //  player_photo.src = jugador['jugador_foto'];
+
     const  jugador_alias  = document.getElementById("span-card-1").innerHTML = jugar_nombre ;
     const jugador_title =  document.getElementById("h_jugador").innerHTML = "Analisis de " + jugar_nombre + " ";
     const  tiempo_juego = document.getElementById("tiempo_juego").innerHTML = jugador ['minutos_jugados'] + ' min' ;
@@ -69,6 +73,7 @@ retrieve_player_info().then(datapoints =>{
     retrieve_distance(jugador_id);
     retrieve_sprints(jugador_id);
     retrieve_hse(jugador_id);
+    retrieve_position_data(id_jugador_jornada);
 
 });
 
@@ -99,6 +104,51 @@ function to_lower_case(nombre){
 }
 
 
+
+
+function retrieve_position_data(id_jugador_jornada){
+  var url = new URL('https://g6d5f1265b0dcaf-dbapex.adb.us-ashburn-1.oraclecloudapps.com/ords/db_apex/golstats/posicion_golstats');
+
+  var params = { id_jugador_jornada:id_jugador_jornada }; // or:
+
+  url.search = new URLSearchParams(params).toString();
+
+  const data_position_response = fetch(url);
+
+  data_position_response.then((response) =>{
+
+  return response.json();
+
+  }).then((items) => {
+    const data_position = items.items[0];
+
+    var result_position_data = []
+
+    result_position_data.push(data_position['pacr']);
+    result_position_data.push(data_position['pnacr']);
+    result_position_data.push(data_position['brd']);
+    result_position_data.push(data_position['bpd']);
+    result_position_data.push(data_position['pacp']);
+    result_position_data.push(data_position['pnacp']);
+    result_position_data.push(data_position['uno_vs_uno_def_ex']);
+    result_position_data.push(data_position['unos_vs_uno_def_nex']);
+    result_position_data.push(data_position['uno_vs_uno_of_ex']);
+    result_position_data.push(data_position['uno_vs_uno_of_nex']);
+    result_position_data.push(data_position['bgap']);
+    result_position_data.push(data_position['area_rival']);
+    result_position_data.push(data_position['rechaces']);
+    result_position_data.push(data_position['asistencias']);
+    result_position_data.push(data_position['centros_izquierda']);
+    result_position_data.push(data_position['centros_derecha']);
+    result_position_data.push(data_position['tiro_gol']);
+
+  
+  });
+}
+
+
+
+
 function retrieve_distance(id_jugador_jornada){
   var url = new URL('https://g6d5f1265b0dcaf-dbapex.adb.us-ashburn-1.oraclecloudapps.com/ords/db_apex/wimu/distance_player');
 
@@ -116,17 +166,19 @@ function retrieve_distance(id_jugador_jornada){
     const data_distance_player = items.items[0];
 
     var result_distance_player = []
-    var counter = 1;
 
-    for(var i in data_distance_player){
+    result_distance_player.push(data_distance_player['distance_0_10']);
+    result_distance_player.push(data_distance_player['distance_10_20']);
+    result_distance_player.push(data_distance_player['distance_20_30']);
+    result_distance_player.push(data_distance_player['distance_30_40']);
+    result_distance_player.push(data_distance_player['distance_40_45']);
+    result_distance_player.push(data_distance_player['distance_45_50']);
+    result_distance_player.push(data_distance_player['distance_50_60']);
+    result_distance_player.push(data_distance_player['distance_60_70']);
+    result_distance_player.push(data_distance_player['distance_70_80']);
+    result_distance_player.push(data_distance_player['distance_80_90']);
 
-      if (counter == 1){
-        counter = counter + 1;
-        continue;
-      }
-      result_distance_player.push(data_distance_player[i]);
-      counter = counter + 1;
-    }
+
     console.log("DISTANCE: ");
     console.log(result_distance_player);
     draw_chart_distance(result_distance_player);
@@ -153,17 +205,19 @@ function retrieve_sprints(id_jugador_jornada){
     const data_sprints_player = items.items[0];
 
     var result_sprints_player = []
-    var counter = 1;
 
-    for(var i in data_sprints_player){
+    result_sprints_player.push(data_sprints_player['sprints_0_10']);
+    result_sprints_player.push(data_sprints_player['sprints_10_20']);
+    result_sprints_player.push(data_sprints_player['sprints_20_30']);
+    result_sprints_player.push(data_sprints_player['sprints_30_40']);
+    result_sprints_player.push(data_sprints_player['sprints_40_45']);
+    result_sprints_player.push(data_sprints_player['sprints_45_50']);
+    result_sprints_player.push(data_sprints_player['sprints_50_60']);
+    result_sprints_player.push(data_sprints_player['sprints_60_70']);
+    result_sprints_player.push(data_sprints_player['sprints_70_80']);
+    result_sprints_player.push(data_sprints_player['sprints_80_90']);
 
-      if (counter == 1){
-        counter = counter + 1;
-        continue;
-      }
-      result_sprints_player.push(data_sprints_player[i]);
-      counter = counter + 1;
-    }
+
     console.log("SPRINTS: ");
     console.log(result_sprints_player);
     draw_chart_sprints(result_sprints_player);
@@ -188,17 +242,19 @@ function retrieve_hse(id_jugador_jornada){
     const data_hse_player = items.items[0];
 
     var result_hse_player = []
-    var counter = 1;
 
-    for(var i in data_hse_player){
+    result_hse_player.push(data_hse_player['hse_0_10']);
+    result_hse_player.push(data_hse_player['hse_10_20']);
+    result_hse_player.push(data_hse_player['hse_20_30']);
+    result_hse_player.push(data_hse_player['hse_30_40']);
+    result_hse_player.push(data_hse_player['hse_40_45']);
+    result_hse_player.push(data_hse_player['hse_45_50']);
+    result_hse_player.push(data_hse_player['hse_50_60']);
+    result_hse_player.push(data_hse_player['hse_60_70']);
+    result_hse_player.push(data_hse_player['hse_70_80']);
+    result_hse_player.push(data_hse_player['hse_80_90']);
 
-      if (counter == 1){
-        counter = counter + 1;
-        continue;
-      }
-      result_hse_player.push(data_hse_player[i]);
-      counter = counter + 1;
-    }
+
     console.log("HSE: ");
     console.log(result_hse_player);
     draw_chart_hse(result_hse_player);
@@ -217,20 +273,14 @@ function draw_chart_distance(result) {
               label:'',
                 data: result, //retrieve de data from the api
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+
+                    'rgba(54, 162, 235, 0.2)'
+
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+
+                    'rgba(54, 162, 235, 1)'
+
                 ],
                 borderWidth: 1
             }]
@@ -259,15 +309,15 @@ function draw_chart_sprints(result_sprints) {
                 label: '',
                 data: result_sprints, //retrieve de data from the api
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
+
+                    'rgba(54, 162, 235, 0.2)', //Azul
                     'rgba(255, 206, 86, 0.2)',
                     'rgba(75, 192, 192, 0.2)',
                     'rgba(153, 102, 255, 0.2)',
                     'rgba(255, 159, 64, 0.2)'
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
+
                     'rgba(54, 162, 235, 1)',
                     'rgba(255, 206, 86, 1)',
                     'rgba(75, 192, 192, 1)',
@@ -300,20 +350,14 @@ function draw_chart_hse(result_hse) {
             datasets: [{
                 data: result_hse, //retrieve de data from the api
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+
+                    'rgba(54, 162, 235, 0.2)'//Azul
+
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+
+                    'rgba(54, 162, 235, 1)' //Azul
+
                 ],
                 borderWidth: 1
             }]

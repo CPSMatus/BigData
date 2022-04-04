@@ -112,7 +112,7 @@ class Jornada():
             if (row["Player"] == "40  50"):
                 lap3_to = counter
                 lap4_from = counter
-            if (row["Player"] == "SEGUNDO TIEMPO"):
+            if (row["Player"] == "SEGUNDO TIEMPO"  ):
                 lap4_to = counter
 
             if (row["Player"] == "0  5"):

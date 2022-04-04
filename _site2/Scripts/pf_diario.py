@@ -25,7 +25,7 @@ import requests
 from datetime import date
 from datetime import datetime, timedelta
 import numpy as np
-
+from colored import Alerta
 
 
 class Pf_diario:
@@ -35,7 +35,7 @@ class Pf_diario:
         self.excel = loc + filename
         self.token = {}
 
-    def get_last_session_info(self,api_call_headers):
+    def get_last_session_id(self,api_call_headers):
 
     #    #    #    #     OBTENER EL ID DE LA SESION DE ENTRENAMIENTO     #    #   #  #
         url_ultima_sesion_entrenamiento = "https://g6d5f1265b0dcaf-dbapex.adb.us-ashburn-1.oraclecloudapps.com/ords/db_apex/sesion/last_sesion"
@@ -44,7 +44,7 @@ class Pf_diario:
 
 
         if	api_call_sesion_response.status_code == 401:
-        	token = get_new_token()
+        	token = obtain_token()
         else:
 
             id_sesion_json = api_call_sesion_response.json()
@@ -54,52 +54,6 @@ class Pf_diario:
         print(sesion_id_num)
 
         return sesion_id_num
-
-    def crear_jugador_sesion(self,api_call_headers):
-        players = self.fill_players()
-
-        #endpoint request get_url
-        test_api_url  = 'https://g6d5f1265b0dcaf-dbapex.adb.us-ashburn-1.oraclecloudapps.com/ords/db_apex/torneo/jugador'
-
-        str = ""
-
-        for i in players:
-            str = str + i + ","
-
-    #    print(str)
-        data_params = {'player_values':str}
-
-        api_call_response = requests.get(test_api_url, headers=api_call_headers, params = data_params,verify=False)
-
-
-        if	api_call_response.status_code == 401:
-        	token = get_new_token()
-        else:
-            items = api_call_response.json()
-
-
-        sesion_id_num = self.get_last_session_info(api_call_headers)
-        df_final = self.create_dill_df()
-        #df_final['ID_SESION_ENTRENAMIENTO'] = sesion_id_num
-
-        print("\n",df_final, sesion_id_num)
-
-        #obtener el URL para poster la duracion del drill en la BD
-        url_jugador_sesion = "https://g6d5f1265b0dcaf-dbapex.adb.us-ashburn-1.oraclecloudapps.com/ords/db_apex/sesion/jugador_sesion"
-
-        counter= 1
-        #for index, row in drill_duration_df.iterrows():
-        for index, row in df_final.iterrows():
-            data = {
-                "drill_duration": row[1],
-                "jugador": row[0],
-                "id_sesion_entrenamiento":sesion_id_num ,
-            }
-
-            api_call_sesion_response = requests.post(url_jugador_sesion, headers=api_call_headers, params = data,verify=False)
-            print(row[0])
-            print(counter, ".- ", api_call_sesion_response.status_code)
-            counter = counter + 1
 
     def  crear_sesion_entrenamiento(self,api_call_headers,data_params,n_microciclo,sesion,lugar_entrenamiento,fecha):
 
@@ -114,7 +68,7 @@ class Pf_diario:
         #   #   Obtener el torneo en donde insertae del endpoint    #  #
 
         if	api_call_response.status_code == 401:
-        	token = get_new_token()
+        	token = obtain_token()
         else:
             items = api_call_response.json()
 
@@ -136,7 +90,6 @@ class Pf_diario:
 
         url = "https://g6d5f1265b0dcaf-dbapex.adb.us-ashburn-1.oraclecloudapps.com/ords/db_apex/torneo/sesion_entrenamiento"
 
-
         response = requests.post(url,headers=api_call_headers, params = data,verify=False)
         print(response.status_code)
 
@@ -149,7 +102,7 @@ class Pf_diario:
 
 
         if	api_call_sesion_response.status_code == 401:
-        	token = get_new_token()
+        	token = obtain_token()
         else:
             data = api_call_sesion_response.json()
 
@@ -352,6 +305,58 @@ class Pf_diario:
 
         return df_result
 
+    def crear_jugador_sesion(self,api_call_headers):
+        players = self.fill_players()
+
+        #endpoint request get_url
+        test_api_url  = 'https://g6d5f1265b0dcaf-dbapex.adb.us-ashburn-1.oraclecloudapps.com/ords/db_apex/torneo/jugador'
+
+        str = ""
+
+        for i in players:
+            str = str + i + ","
+
+    #    print(str)
+        data_params = {'player_values':str}
+
+        api_call_response = requests.get(test_api_url, headers=api_call_headers, params = data_params,verify=False)
+
+
+        if	api_call_response.status_code == 401:
+        	token = obtain_token()
+        else:
+            items = api_call_response.json()
+
+
+        sesion_id_num = self.get_last_session_id(api_call_headers)
+        df_final = self.create_dill_df()
+        #df_final['ID_SESION_ENTRENAMIENTO'] = sesion_id_num
+
+        print("\n",df_final, sesion_id_num)
+
+        #obtener el URL para poster la duracion del drill en la BD
+        url_jugador_sesion = "https://g6d5f1265b0dcaf-dbapex.adb.us-ashburn-1.oraclecloudapps.com/ords/db_apex/sesion/jugador_sesion"
+
+        counter= 1
+        #for index, row in drill_duration_df.iterrows():
+        for index, row in df_final.iterrows():
+            data = {
+                "drill_duration": row[1],
+                "jugador": row[0],
+                "id_sesion_entrenamiento":sesion_id_num ,
+            }
+
+            api_call_sesion_response = requests.post(url_jugador_sesion, headers=api_call_headers, params = data,verify=False)
+
+            if (api_call_sesion_response.status_code != 200):
+                error = Alerta(api_call_sesion_response.status_code,row[0])
+                error.print_error_message()
+            else:
+                print(row[0])
+                print(counter, ".- ", api_call_sesion_response.status_code)
+
+            counter = counter + 1
+
 
     def crear_wimu_sesion_data(self,api_call_headers):
 
@@ -366,7 +371,7 @@ class Pf_diario:
 
         #obtener el URL para poster los valores obtenidos
         url_jugador_sesion = "https://g6d5f1265b0dcaf-dbapex.adb.us-ashburn-1.oraclecloudapps.com/ords/db_apex/sesion/wimu_sesion_data"
-        sesion_id_num = self.get_last_session_info(api_call_headers)
+        sesion_id_num = self.get_last_session_id(api_call_headers)
         print(df_result)
 
         counter= 1
@@ -390,7 +395,14 @@ class Pf_diario:
             }
 
             api_call_sesion_response = requests.post(url_jugador_sesion, headers=api_call_headers, params = data,verify=False)
-            print(counter, ".- ", api_call_sesion_response.status_code)
+            if (api_call_sesion_response.status_code != 200):
+                error = Alerta(api_call_sesion_response.status_code,row[0])
+                error.print_error_message()
+            else:
+                print(row[0])
+                print(counter, ".- ", api_call_sesion_response.status_code)
+
+
             counter = counter + 1
 
         return df_result
@@ -480,6 +492,12 @@ class Pf_diario:
                 "m_min":row[2]
             }
             api_call_sesion_response = requests.post(url_jugador_sesion, headers=api_call_headers, params = data,verify=False)
-            print(api_call_sesion_response.status_code)
+
+            if (api_call_sesion_response.status_code != 200):
+                error = Alerta(api_call_sesion_response.status_code,row[0])
+                error.print_error_message()
+            else:
+                print(row[0])
+                print(counter, ".- ", api_call_sesion_response.status_code)
 
         return df_result

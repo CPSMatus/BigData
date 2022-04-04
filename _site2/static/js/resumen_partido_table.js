@@ -59,12 +59,20 @@ retrieve_jornada_info().then(datapoints =>{
   abitraje = document.getElementById("arbitraje").innerHTML = "Arbitró: " + arbitro;
 
   const image_local = document.getElementById("image_local");
+  const image_visitante = document.getElementById("image_visitante");
 
-    image_local.src = "https://s3.amazonaws.com/lmxwebsite/docs/archdgtl/AfldDrct/logos/11550/11550.png";
+  if (jornada['is_local'] == 1){
 
-  const image_rival = document.getElementById("image_rival");
+    image_visitante.src = jornada['logo_equipo'];
+  }else {
 
-    image_rival.src = "https://s3.amazonaws.com/lmxwebsite/docs/archdgtl/AfldDrct/logos/14/14.png";
+    image_local.src = jornada['logo_equipo'];
+
+  }
+
+
+
+
 
 
   console.log(id_jornada);
@@ -119,18 +127,99 @@ function retrieve_golstats_general_info(id_jornada){
    const my_team_response = items.items[0];
    var my_team_id = my_team_response['equipo_id'];
 
-    //Incluir en la plantilla HTML la informacion de mi Equipo
 
-
-     //Obtener la informacion de Golstats x default de mi Equipo
-    retrieve_golstats_team_defensiva(id_jornada,my_team_id);
-
-  });
 
    //Crear el escucha del checkbox para mostrar informacion del equipo rival
 
 
+     //Obtener la informacion de Golstats x default de mi Equipo
+    retrieve_golstats_team_defensiva(id_jornada,my_team_id);
+    retrieve_golstats_team_ofensiva(id_jornada,my_team_id);
+  });
+
+
+
 }
+
+
+
+function retrieve_golstats_team_ofensiva(id_jornada,my_team_id){
+  var url = new URL('https://g6d5f1265b0dcaf-dbapex.adb.us-ashburn-1.oraclecloudapps.com/ords/db_apex/golstats/ofensiva_golstats');
+
+  var params = { id_jornada:id_jornada,
+                id_equipo:my_team_id  }; // or:
+
+  url.search = new URLSearchParams(params).toString();
+
+  const response_distance = fetch(url);
+
+  response_distance.then((response) =>{
+
+  return response.json();
+
+  }).then((items) => {
+    const data_ofensiva = items.items[0];
+    console.log("GOLSTATS OFENSIVA: ");
+    console.log(data_ofensiva)
+    var result_ofensiva = []
+  //  result_ofensiva.push(data_ofensiva['faltas_recibidas']);
+  //  result_ofensiva.push(data_ofensiva['goles']);
+    result_ofensiva.push(data_ofensiva['pases_acertados_cancha_propia']);
+    result_ofensiva.push(data_ofensiva['pases_acertados_cancha_rival']);
+    result_ofensiva.push(data_ofensiva['pases_no_acertados_cancha_propia']);
+    result_ofensiva.push(data_ofensiva['pases_no_acertados_cancha_rival']);
+    result_ofensiva.push(data_ofensiva['uno_vs_uno_exitoso_ofensivo']);
+    result_ofensiva.push(data_ofensiva['uno_vs_uno_no_exitoso_ofensivo']);
+
+
+    //console.log(result_ofensiva);
+    draw_chart_ofensiva_golstats(result_ofensiva);
+  });
+}
+
+
+function draw_chart_ofensiva_golstats(result) {
+  var ofensiva_canvas = document.getElementById('ofensiva-chart');
+
+  const ofensiva_data = {
+    labels: [
+      'pases acertados cancha propia',
+      'pases acertados cancha rival',
+      'pases no acertados cancha propia',
+      'pases no acertados cancha rival',
+    //  'goles permitidos',
+    //  'faltas recibidas',
+      '1 vs 1 exitoso ofensivo',
+      '1 vs 1 no exitoso ofensivo'
+    ],
+    datasets: [{
+      label: 'Equipo Local',
+      data: result,
+      fill: true,
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgb(255, 99, 132)',
+      pointBackgroundColor: 'rgb(255, 99, 132)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgb(255, 99, 132)'
+    } ]
+  };
+
+
+  var radarChart_defensiva = new Chart(ofensiva_canvas, {
+    type: 'radar',
+    data: ofensiva_data,
+    options:{
+        responsive: true,
+        maintainAspectRatio: false
+    }
+  });
+
+}
+
+
+
+
 
 
 
@@ -150,21 +239,19 @@ function retrieve_golstats_team_defensiva(id_jornada,my_team_id){
 
   }).then((items) => {
     const data_defensiva = items.items[0];
+    console.log("GOLSTATS DEFENSIVA: ");
     console.log(data_defensiva)
     var result_defensiva = []
     result_defensiva.push(data_defensiva['balones_recuperados_disputa']);
-    //result_defensiva.push(data_defensiva['rechaces']);
-    result_defensiva.push(data_defensiva['goles_permitidos']);
+    result_defensiva.push(data_defensiva['rechaces']);
+    //result_defensiva.push(data_defensiva['goles_permitidos']);
     result_defensiva.push(data_defensiva['tiros_a_gol_recibidos']);
-    result_defensiva.push(data_defensiva['faltas_cometidas']);
+    //result_defensiva.push(data_defensiva['faltas_cometidas']);
     result_defensiva.push(data_defensiva['uno_vs_uno_exitoso_defensivo']);
     result_defensiva.push(data_defensiva['uno_vs_uno_no_exitoso_defensivo']);
 
 
-
-
-    console.log("GOLSTATS DEFENSIVA: ");
-    console.log(result_defensiva);
+  //  console.log(result_defensiva);
     draw_chart_defensiva_golstats(result_defensiva);
 
   });
@@ -177,10 +264,10 @@ function draw_chart_defensiva_golstats(result) {
   const defensiva_data = {
     labels: [
       'balones recuperados en disputa',
-    //  'rechaces',
-      'goles permitidos',
+      'rechaces',
+    //  'goles permitidos',
       'tiros a gol recibidos',
-      'faltas cometidas',
+    //  'faltas cometidas',
       '1 vs 1 exitoso defensivo',
       '1 vs 1 no exitoso defensivo'
     ],

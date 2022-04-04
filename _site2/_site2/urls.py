@@ -19,10 +19,9 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-
-from _site2.views import analisis_jugador_jornada, analisis_torneo, table_jugadores,resumen_entrenamiento,dashboard_jugador,resumen_entrenamiento_filtros
 from _site2.login.login_view import login_page
-from _site2.torneo.torneo_view import resumen_jornadas
+from _site2.sesiones.sesion_view import resumen_entrenamiento
+#from _site2.torneo.torneo_view import resumen_jornadas
 from _site2.ultima_jornada.ultima_jornada_view import resumen_ultima_jornada
 from _site2.jugador_x_partido.jugador_x_partido_view  import jugador_x_partido
 
@@ -34,21 +33,16 @@ app_name = 'urls'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('analisis_jugador_jornada/', analisis_jugador_jornada),
+#    path('analisis_jugador_jornada/', analisis_jugador_jornada),
     path('login/', login_page),
-    path('resumen_torneo/',analisis_torneo),
+#    path('resumen_torneo/',analisis_torneo),
 
-    path('table_jugadores/', table_jugadores),
+#    path('table_jugadores/', table_jugadores),
     path('resumen_entrenamiento/', resumen_entrenamiento),
-    path('dashboard_jugador/', dashboard_jugador),
-    path('resumen_entrenamiento_filtros/', resumen_entrenamiento_filtros),
+#    path('dashboard_jugador/', dashboard_jugador),
 
     #path('',include('frontend.urls')),
-    path('resumen_jornadas/', resumen_jornadas),
-
-
-
-
+    #path('resumen_jornadas/', resumen_jornadas),
     path('resumen_partido/', resumen_ultima_jornada),
     path('resumen_jugador/', jugador_x_partido,name='jugador_x_partido')
 ]

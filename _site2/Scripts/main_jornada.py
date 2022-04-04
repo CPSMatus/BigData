@@ -8,17 +8,20 @@ sys.path.insert(0, '/Users/smatus/Documents/Python by example/project 1/_site2/_
 from get_ultima_jornada import Ultima_Jornada
 from jornada_dataframe import Jornada
 
-loc_wimu = ("/Users/smatus/Desktop/Club Puebla/Excel Jornadas/CL2022/J6 CL 2022.xlsx")
+loc_wimu = ("/Users/smatus/Desktop/Club Puebla/Excel Jornadas/CL2022/J11 CL 2022.xlsx")
 
 
 
-loc_golstats_jugador = ("/Users/smatus/Desktop/Club Puebla/Excel Jornadas/CL2022/GOLSTATS CL2022/Matrix Puebla FC J6 CL 2022.xlsx")
-loc_golstats_equipo = ("/Users/smatus/Desktop/Club Puebla/Excel Jornadas/CL2022/GOLSTATS CL2022/Matrix Liga MX J6 CL 2022.xlsx")
+loc_golstats_jugador = ("/Users/smatus/Desktop/Club Puebla/Excel Jornadas/CL2022/GOLSTATS CL2022/Matrix Puebla FC J11 CL 2022.xlsx")
+loc_golstats_equipo = ("/Users/smatus/Desktop/Club Puebla/Excel Jornadas/CL2022/GOLSTATS CL2022/Matrix Liga MX J11 CL 2022.xlsx")
 
 
 
+#Instanciar clases
+#Leer los archivos para asegurarse que son correctos
+jornada_wimu = Jornada(loc_wimu)
 
-
+golstats_jugador = Golstats_jugador(loc_golstats_jugador,jornada_id)
 
 #Crear estadisiticas de golstats x Equipo
 golstats_equipo = Golstats_equipo(loc_golstats_equipo)
@@ -53,19 +56,18 @@ golstats_equipo.create_ofensiva(rival_header,jornada_id,jornada_info['id_rival']
 golstats_equipo.create_defensiva(rival_header,jornada_id,jornada_info['id_rival'])
 
 #Crear jugador x jornada
-golstats_jugador = Golstats_jugador(loc_golstats_jugador,jornada_id)
+
 golstats_jugador.crear_jugador_jornada()
 
 #Estadisticas de WIMU X JORNADA
 
 jugador_jornada = Jugador_jornada(loc_golstats_jugador,loc_wimu)
-#Obtener a todos los jugadores que participaron en la jornada
 
+#Post jugador x jornada
 items = jugador_jornada.get_jugadores_jornada(jornada_id)
 jugadores_array = golstats_jugador.post_golstats_posicion(items)
 
 
-jornada_wimu = Jornada(loc_wimu)
 players = jornada_wimu.fill_players()
 print(players)
 #Extraer las columnas del excel para analizar solo el dataframe

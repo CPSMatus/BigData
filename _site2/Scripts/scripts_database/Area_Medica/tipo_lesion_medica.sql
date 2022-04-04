@@ -7,12 +7,28 @@ CREATE TABLE tipo_lesion_medica (
 
 
 INSERT INTO tipo_lesion_medica(NOMBRE_TIPO_LESION)
-VALUES('lesion muscular');
+VALUES('MUSCULAR');
 
 
 INSERT INTO tipo_lesion_medica(NOMBRE_TIPO_LESION)
-VALUES('lesion tendinosa');
+VALUES('TENDINOSA');
 
 
 INSERT INTO tipo_lesion_medica(NOMBRE_TIPO_LESION)
-VALUES('lesion osea');
+VALUES('OSEA');
+
+
+INSERT INTO tipo_lesion_medica(NOMBRE_TIPO_LESION)
+VALUES('LIGAMENTARIA');
+
+
+INSERT INTO tipo_lesion_medica(NOMBRE_TIPO_LESION)
+VALUES('RAQUIS');
+
+
+INSERT INTO tipo_lesion_medica(NOMBRE_TIPO_LESION)
+VALUES('MENISCAL');
+
+
+INSERT INTO tipo_lesion_medica(NOMBRE_TIPO_LESION)
+VALUES('CONMOSION CEREBRAL');
