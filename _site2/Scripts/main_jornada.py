@@ -8,12 +8,12 @@ sys.path.insert(0, '/Users/smatus/Documents/Python by example/project 1/_site2/_
 from get_ultima_jornada import Ultima_Jornada
 from jornada_dataframe import Jornada
 
-loc_wimu = ("/Users/smatus/Desktop/Club Puebla/Excel Jornadas/CL2022/J11 CL 2022.xlsx")
+loc_wimu = ("/Users/smatus/Desktop/Club Puebla/Excel Jornadas/CL2022/RECLASIFICACIÓN CL 2022.xlsx")
 
 
 
-loc_golstats_jugador = ("/Users/smatus/Desktop/Club Puebla/Excel Jornadas/CL2022/GOLSTATS CL2022/Matrix Puebla FC J11 CL 2022.xlsx")
-loc_golstats_equipo = ("/Users/smatus/Desktop/Club Puebla/Excel Jornadas/CL2022/GOLSTATS CL2022/Matrix Liga MX J11 CL 2022.xlsx")
+loc_golstats_jugador = ("/Users/smatus/Desktop/Club Puebla/Excel Jornadas/CL2022/GOLSTATS CL2022/Matrix Puebla FC Reclasificacion 2022.xlsx")
+loc_golstats_equipo = ("/Users/smatus/Desktop/Club Puebla/Excel Jornadas/CL2022/GOLSTATS CL2022/Matrix Liga MX Reclasificacion 2022.xlsx")
 
 
 
@@ -21,7 +21,6 @@ loc_golstats_equipo = ("/Users/smatus/Desktop/Club Puebla/Excel Jornadas/CL2022/
 #Leer los archivos para asegurarse que son correctos
 jornada_wimu = Jornada(loc_wimu)
 
-golstats_jugador = Golstats_jugador(loc_golstats_jugador,jornada_id)
 
 #Crear estadisiticas de golstats x Equipo
 golstats_equipo = Golstats_equipo(loc_golstats_equipo)
@@ -36,6 +35,7 @@ jornada_info = ultima_jornada.get_jornada_info()
 jornada_id =  jornada_info['jornada_id']
 
 
+golstats_jugador = Golstats_jugador(loc_golstats_jugador,jornada_id)
 print("JORNADA ID: \n", jornada_id)
 
 
@@ -59,13 +59,17 @@ golstats_equipo.create_defensiva(rival_header,jornada_id,jornada_info['id_rival'
 
 golstats_jugador.crear_jugador_jornada()
 
-#Estadisticas de WIMU X JORNADA
 
+#Estadisticas de WIMU X JORNADA
 jugador_jornada = Jugador_jornada(loc_golstats_jugador,loc_wimu)
+
+
 
 #Post jugador x jornada
 items = jugador_jornada.get_jugadores_jornada(jornada_id)
+
 jugadores_array = golstats_jugador.post_golstats_posicion(items)
+
 
 
 players = jornada_wimu.fill_players()

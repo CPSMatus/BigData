@@ -24,7 +24,7 @@ async function retrieve_jornada_info(){
 retrieve_jornada_info().then(datapoints =>{
 
   var jornada = datapoints.items[0];
-  const  title  = document.getElementById("h_jornada").innerHTML = "   en Jornada " +  jornada['n_jornada'] ;
+  const  title  = document.getElementById("h_jornada").innerHTML = "   en Jornada " + " " + jornada['n_jornada'] ;
 
 
 });
@@ -53,9 +53,10 @@ retrieve_player_info().then(datapoints =>{
     var jugador = datapoints.items[0];
     //Llenar la informacion de la plantilla con la informacion del jugador
     var jugar_nombre = to_lower_case(jugador['wimu_alias']);
+
     const player_photo = document.getElementById("player-photo");
 
-  //  player_photo.src = jugador['jugador_foto'];
+
 
     const  jugador_alias  = document.getElementById("span-card-1").innerHTML = jugar_nombre ;
     const jugador_title =  document.getElementById("h_jugador").innerHTML = "Analisis de " + jugar_nombre + " ";
@@ -67,13 +68,15 @@ retrieve_player_info().then(datapoints =>{
 
     const  sale = document.getElementById("sale").innerHTML = 'min '+ jugador['sale'] + "' " ;
 
-
+    //player_photo.src(jugador['jugador_jornada_id']);
+    player_photo.src = jugador['jugador_foto'];
+    const posicion_jugador = jugador['id_posicion_principal'];
     console.log(jugador);
-    const jugador_id = jugador['jugador_jornada_id']
+    const jugador_id = jugador['jugador_jornada_id'];
     retrieve_distance(jugador_id);
     retrieve_sprints(jugador_id);
     retrieve_hse(jugador_id);
-    retrieve_position_data(id_jugador_jornada);
+    retrieve_position_data(posicion_jugador,jugador_id);
 
 });
 
@@ -105,8 +108,7 @@ function to_lower_case(nombre){
 
 
 
-
-function retrieve_position_data(id_jugador_jornada){
+function retrieve_position_data(posicion_jugador,id_jugador_jornada){
   var url = new URL('https://g6d5f1265b0dcaf-dbapex.adb.us-ashburn-1.oraclecloudapps.com/ords/db_apex/golstats/posicion_golstats');
 
   var params = { id_jugador_jornada:id_jugador_jornada }; // or:
@@ -121,9 +123,12 @@ function retrieve_position_data(id_jugador_jornada){
 
   }).then((items) => {
     const data_position = items.items[0];
+    position_array_data = create_array_per_position(posicion_jugador,data_position);
+      console.log('POSICION:');
+    console.log(position_array_data);
 
-    var result_position_data = []
-
+    draw_chart_position_golstats(position_array_data);
+/*
     result_position_data.push(data_position['pacr']);
     result_position_data.push(data_position['pnacr']);
     result_position_data.push(data_position['brd']);
@@ -141,12 +146,99 @@ function retrieve_position_data(id_jugador_jornada){
     result_position_data.push(data_position['centros_izquierda']);
     result_position_data.push(data_position['centros_derecha']);
     result_position_data.push(data_position['tiro_gol']);
+*/
 
-  
   });
 }
 
 
+function create_array_per_position(position,data_position){
+  var result_position_data = []
+
+  if (position == 1){
+    //Portero
+  }
+
+  if (position == 2){
+    //Central
+    result_position_data.push(data_position['pacr']);
+    result_position_data.push(data_position['pnacr']);
+    result_position_data.push(data_position['brd']);
+    result_position_data.push(data_position['bpd']);
+    result_position_data.push(data_position['pacp']);
+    result_position_data.push(data_position['pnacp']);
+    result_position_data.push(data_position['uno_vs_uno_def_ex']);
+    result_position_data.push(data_position['unos_vs_uno_def_nex']);
+    result_position_data.push(data_position['bgap']);
+    result_position_data.push(data_position['area_rival']);
+    result_position_data.push(data_position['rechaces']);
+
+  }
+  if (position == 3){
+    //Carrilero
+    result_position_data.push(data_position['pacr']);
+    result_position_data.push(data_position['pnacr']);
+    result_position_data.push(data_position['brd']);
+    result_position_data.push(data_position['pacp']);
+    result_position_data.push(data_position['pnacp']);
+    result_position_data.push(data_position['uno_vs_uno_def_ex']);
+    result_position_data.push(data_position['unos_vs_uno_def_nex']);
+    result_position_data.push(data_position['uno_vs_uno_of_ex']);
+    result_position_data.push(data_position['uno_vs_uno_of_nex']);
+    result_position_data.push(data_position['bgap']);
+    result_position_data.push(data_position['asistencias']);
+    result_position_data.push(data_position['centros_izquierda']);
+    result_position_data.push(data_position['centros_derecha']);
+    result_position_data.push(data_position['tiro_gol']);
+
+
+  }
+  if (position == 4){
+    //Volante
+    result_position_data.push(data_position['pacr']);
+    result_position_data.push(data_position['pnacr']);
+    result_position_data.push(data_position['brd']);
+    result_position_data.push(data_position['bpd']);
+    result_position_data.push(data_position['uno_vs_uno_of_ex']);
+    result_position_data.push(data_position['uno_vs_uno_of_nex']);
+    result_position_data.push(data_position['area_rival']);
+    result_position_data.push(data_position['asistencias']);
+    result_position_data.push(data_position['centros_izquierda']);
+    result_position_data.push(data_position['centros_derecha']);
+    result_position_data.push(data_position['tiro_gol']);
+
+  }
+  if (position == 5){
+    //Media punta
+    result_position_data.push(data_position['pacr']);
+    result_position_data.push(data_position['pnacr']);
+    result_position_data.push(data_position['brd']);
+    result_position_data.push(data_position['bpd']);
+    result_position_data.push(data_position['uno_vs_uno_of_ex']);
+    result_position_data.push(data_position['uno_vs_uno_of_nex']);
+    result_position_data.push(data_position['area_rival']);
+    result_position_data.push(data_position['asistencias']);
+    result_position_data.push(data_position['centros_izquierda']);
+    result_position_data.push(data_position['centros_derecha']);
+    result_position_data.push(data_position['tiro_gol']);
+
+
+  }
+  if (position == 6){
+    //Centro delantero
+    result_position_data.push(data_position['pacr']);
+    result_position_data.push(data_position['pnacr']);
+    result_position_data.push(data_position['brd']);
+    result_position_data.push(data_position['bpd']);
+    result_position_data.push(data_position['uno_vs_uno_of_ex']);
+    result_position_data.push(data_position['uno_vs_uno_of_nex']);
+    result_position_data.push(data_position['area_rival']);
+    result_position_data.push(data_position['asistencias']);
+    result_position_data.push(data_position['tiro_gol']);
+
+  }
+  return result_position_data;
+}
 
 
 function retrieve_distance(id_jugador_jornada){
@@ -310,19 +402,10 @@ function draw_chart_sprints(result_sprints) {
                 data: result_sprints, //retrieve de data from the api
                 backgroundColor: [
 
-                    'rgba(54, 162, 235, 0.2)', //Azul
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
+                    'rgba(54, 162, 235, 0.2)' //Azul
+              ],
                 borderColor: [
-
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                  'rgba(54, 162, 235, 1)'//Azul
                 ],
                 borderWidth: 1
             }]
@@ -373,6 +456,95 @@ function draw_chart_hse(result_hse) {
         }
     });
 }
+
+
+
+function draw_chart_position_golstats(result) {
+  var position_canvas = document.getElementById('position-chart');
+
+  const position_data = {
+    labels: [
+      'etiqueta 1',
+        'etiqueta 2',
+        'etiqueta 3',
+        'etiqueta 4',
+        'etiqueta 5',
+        'etiqueta 6',
+        'etiqueta 7',
+        'etiqueta 8',
+        'etiqueta 9',
+        'etiqueta 10',
+        'etiqueta 11',
+        'etiqueta 12',
+        'etiqueta 13',
+        'etiqueta 14',
+
+    ],
+    datasets: [{
+      label: 'Equipo Local',
+      data: result,
+      fill: true,
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',//Azul
+      borderColor:   'rgba(54, 162, 235, 1)' ,//Azul
+      pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgb(255, 99, 132)'
+    } ]
+  };
+
+
+  var radarChart_position = new Chart(position_canvas, {
+    type: 'radar',
+    data: position_data,
+    options:{
+        responsive: true,
+        maintainAspectRatio: false
+    }
+  });
+
+}
+
+
+
+function draw_chart_defensiva_golstats(result) {
+  var defensiva_canvas = document.getElementById('defensiva-chart');
+
+  const defensiva_data = {
+    labels: [
+      'balones recuperados en disputa',
+      'rechaces',
+    //  'goles permitidos',
+      'tiros a gol recibidos',
+    //  'faltas cometidas',
+      '1 vs 1 exitoso defensivo',
+      '1 vs 1 no exitoso defensivo'
+    ],
+    datasets: [{
+      label: 'Equipo Local',
+      data: result,
+      fill: true,
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',//Azul
+      borderColor:   'rgba(54, 162, 235, 1)' ,//Azul
+      pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgb(255, 99, 132)'
+    } ]
+  };
+
+
+  var radarChart_defensiva = new Chart(defensiva_canvas, {
+    type: 'radar',
+    data: defensiva_data,
+    options:{
+        responsive: true,
+        maintainAspectRatio: false
+    }
+  });
+
+}
+
 
 
 

@@ -64,9 +64,12 @@ retrieve_jornada_info().then(datapoints =>{
   if (jornada['is_local'] == 1){
 
     image_visitante.src = jornada['logo_equipo'];
+    image_local.src = "https://s3.amazonaws.com/lmxwebsite/docs/archdgtl/AfldDrct/logos/11550/11550.png";
+
   }else {
 
     image_local.src = jornada['logo_equipo'];
+    image_visitante.src = "https://s3.amazonaws.com/lmxwebsite/docs/archdgtl/AfldDrct/logos/11550/11550.png";
 
   }
 
@@ -196,9 +199,9 @@ function draw_chart_ofensiva_golstats(result) {
       label: 'Equipo Local',
       data: result,
       fill: true,
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgb(255, 99, 132)',
-      pointBackgroundColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',//Azul,
+      borderColor:   'rgba(54, 162, 235, 1)', //Azul
+      pointBackgroundColor: 'rgba(54, 162, 235, 1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgb(255, 99, 132)'
@@ -275,9 +278,9 @@ function draw_chart_defensiva_golstats(result) {
       label: 'Equipo Local',
       data: result,
       fill: true,
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgb(255, 99, 132)',
-      pointBackgroundColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',//Azul
+      borderColor:   'rgba(54, 162, 235, 1)' ,//Azul
+      pointBackgroundColor: 'rgba(54, 162, 235, 1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgb(255, 99, 132)'
@@ -339,20 +342,10 @@ var canvas_sprint = document.getElementById('sprints-chart').getContext('2d');
 
               data: result, //retrieve de data from the api
               backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
+                  'rgba(54, 162, 235, 0.2)'//Azul
               ],
               borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
+                  'rgba(54, 162, 235, 1)' //Azul
               ],
               borderWidth: 1
           }]
@@ -409,20 +402,10 @@ var distance_canvas = document.getElementById('distance-chart').getContext('2d')
 
               data: result, //retrieve de data from the api
               backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
+                'rgba(54, 162, 235, 0.2)'//Azul
               ],
               borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
+                  'rgba(54, 162, 235, 1)' //Azul
               ],
               borderWidth: 1
           }]
@@ -437,4 +420,15 @@ var distance_canvas = document.getElementById('distance-chart').getContext('2d')
           }
       }
   });
+}
+
+
+function checkMe(){
+  var checkbox_equipo = document.getElementById("checkbox_equipo");
+  var checkbox_rival = document.getElementById("checkbox_rival");
+/*
+  if(checkbox_equipo.cheked == true){
+
+  }
+*/
 }

@@ -216,8 +216,8 @@ class Pf_diario:
         return m_min_df
 
 
-    def create_dill_df(self):
-        require_cols_sheet_0_duration = [0,2]
+    def create_dill_df(self,require_cols_sheet_0_duration):
+
         #Obtener la duracion del drills
         drill_duration_df = pd.read_excel(self.excel, usecols = require_cols_sheet_0_duration)
 
@@ -329,7 +329,8 @@ class Pf_diario:
 
 
         sesion_id_num = self.get_last_session_id(api_call_headers)
-        df_final = self.create_dill_df()
+        require_cols_sheet_0_duration = [0,2]
+        df_final = self.create_dill_df(require_cols_sheet_0_duration)
         #df_final['ID_SESION_ENTRENAMIENTO'] = sesion_id_num
 
         print("\n",df_final, sesion_id_num)
@@ -407,6 +408,66 @@ class Pf_diario:
 
         return df_result
 
+
+    def crear_jugador_sesion_xls(self,api_call_headers):
+        players = self.fill_players()
+
+        #endpoint request get_url
+        test_api_url  = 'https://g6d5f1265b0dcaf-dbapex.adb.us-ashburn-1.oraclecloudapps.com/ords/db_apex/torneo/jugador'
+
+        str = ""
+
+        for i in players:
+            str = str + i + ","
+
+    #    print(str)
+        data_params = {'player_values':str}
+
+        api_call_response = requests.get(test_api_url, headers=api_call_headers, params = data_params,verify=False)
+
+
+        if	api_call_response.status_code == 401:
+        	token = obtain_token()
+        else:
+            items = api_call_response.json()
+
+
+        sesion_id_num = self.get_last_session_id(api_call_headers)
+        require_cols_sheet_0_duration =[0,1]
+        df_final = self.create_dill_df(require_cols_sheet_0_duration)
+        #df_final['ID_SESION_ENTRENAMIENTO'] = sesion_id_num
+
+        print("\n",df_final, sesion_id_num)
+
+        #obtener el URL para poster la duracion del drill en la BD
+        url_jugador_sesion = "https://g6d5f1265b0dcaf-dbapex.adb.us-ashburn-1.oraclecloudapps.com/ords/db_apex/sesion/jugador_sesion"
+
+        counter= 1
+        #for index, row in drill_duration_df.iterrows():
+        for index, row in df_final.iterrows():
+            data = {
+                "drill_duration": row[1],
+                "jugador": row[0],
+                "id_sesion_entrenamiento":sesion_id_num ,
+            }
+
+            api_call_sesion_response = requests.post(url_jugador_sesion, headers=api_call_headers, params = data,verify=False)
+
+            if (api_call_sesion_response.status_code != 200):
+                error = Alerta(api_call_sesion_response.status_code,row[0])
+                error.print_error_message()
+            else:
+                print(row[0])
+                print(counter, ".- ", api_call_sesion_response.status_code)
+
+            counter = counter + 1
+
+
+
+
+
+
+
     def crear_wimu_sesion_data_xls(self,api_call_headers):
 
         distance_sheet = 0
@@ -415,7 +476,7 @@ class Pf_diario:
         load_sheet = 9
         counter = 0
 
-        require_cols_sheet_0 = [0,3,4,5,13]
+        require_cols_sheet_0 = [0,2,3,4,13]
         #require_cols_sheet_0_duration = [0,2]
         require_cols_sheet_1 = [11,12,13,14]
         require_cols_sheet_9 = [2,13]
@@ -468,6 +529,8 @@ class Pf_diario:
 
 
         #print("\n, the number of columns is :", n)
+        #Obtener la ultima sesion de entrenamiento antes de enviar
+        sesion_id_num = self.get_last_session_id(api_call_headers)
         print(df_result)
 
 
@@ -475,11 +538,12 @@ class Pf_diario:
         url_jugador_sesion = "https://g6d5f1265b0dcaf-dbapex.adb.us-ashburn-1.oraclecloudapps.com/ords/db_apex/sesion/wimu_sesion_data"
 
 
-
+        counter= 1
         #Enviar a cada jugador a la base de datos
         for index, row in df_result.iterrows():
             data = {
                 "jugador": row[0],
+                "id_sesion_entrenamiento": sesion_id_num,
                 "total_distance": row[1],
                 "explosive_distance":row[3],
                 "hsr_abs":row[4],
@@ -499,5 +563,7 @@ class Pf_diario:
             else:
                 print(row[0])
                 print(counter, ".- ", api_call_sesion_response.status_code)
+
+            counter = counter + 1
 
         return df_result

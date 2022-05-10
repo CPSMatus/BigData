@@ -44,6 +44,7 @@ wimu_sesion_data = c.crear_wimu_sesion_data(api_call_headers)
 
 
 #Solo en caso de que el archivo recibido sea xls
+#c.crear_jugador_sesion_xls(api_call_headers)
 #c.crear_wimu_sesion_data_xls(api_call_headers)
 
 

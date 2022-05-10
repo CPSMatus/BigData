@@ -17,6 +17,11 @@
   color: rgb(28, 200, 138);
 }
 
+#player-photo{
+width:43px;
+height: 51px;
+}
+
 .border-start-success {
   background: rgb(28,28,28);
   height: 95px;
